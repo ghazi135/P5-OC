@@ -8,19 +8,19 @@ public class PersonServiceTest {
 
     private PersonService personService ;
 
-    @BeforeEach
-    public void setUp() throws Exception {
-        personService = new PersonService();
-
-    }
-
-    @Test
-    public void findAllServiceTest(){
-
-      /*  List<Person> listPerson;
-        listPerson = new ArrayList<Person>();
-         listPerson = (List<Person>) this.personService.findAll();
-        Assertions.assertThat(listPerson).isEqualTo(null);
-*/
-    }
+//    @BeforeEach
+//    public void setUp() throws Exception {
+//        personService = new PersonService();
+//
+//    }
+//
+//    @Test
+//    public void findAllServiceTest(){
+//
+//      /*  List<Person> listPerson;
+//        listPerson = new ArrayList<Person>();
+//         listPerson = (List<Person>) this.personService.findAll();
+//        Assertions.assertThat(listPerson).isEqualTo(null);
+//*/
+//    }
 }

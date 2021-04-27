@@ -1,6 +1,6 @@
 package com.SafetyNet.api.dao;
 
-import com.SafetyNet.api.Model.Person;
+import com.SafetyNet.api.model.Person;
 
 import java.util.List;
 

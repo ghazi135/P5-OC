@@ -1,6 +1,7 @@
 package com.SafetyNet.api.dao;
-import com.SafetyNet.api.Model.Person;
+import com.SafetyNet.api.model.Person;
 import com.SafetyNet.api.json.DataReaderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class PersonDaoImpl implements PersonDao {
     public PersonDaoImpl() {
 
     }
-
+    @Autowired
     public PersonDaoImpl(List<Person> person) throws Exception {
         super();
         person       = new DataReaderService().getData().getPersons();

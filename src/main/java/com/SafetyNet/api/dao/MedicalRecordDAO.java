@@ -1,6 +1,6 @@
 package com.SafetyNet.api.dao;
 
-import com.SafetyNet.api.Model.MedicalRecord;
+import com.SafetyNet.api.model.MedicalRecord;
 
 import java.util.List;
 

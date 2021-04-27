@@ -1,6 +1,5 @@
-package com.SafetyNet.api.Model;
+package com.SafetyNet.api.model;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Person {

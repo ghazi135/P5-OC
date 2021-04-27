@@ -11,9 +11,9 @@ public class DataReaderService {
 
     private static final Logger logger = LogManager.getLogger(DataReaderService.class);
 
-    private ObjectMapper objectMapper = new ObjectMapper();
-    private File         file         = new File("src/main/resources/Data.json");
-    private DataReader   dataReader;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final File         file         = new File("src/main/resources/Data.json");
+    private       DataReader   dataReader;
 
     private DataReader readJSONFile() throws Exception {
 

@@ -1,6 +1,6 @@
 package com.SafetyNet.api.dao;
 
-import com.SafetyNet.api.Model.Firestation;
+import com.SafetyNet.api.model.Firestation;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.SafetyNet.api.Model;
+package com.SafetyNet.api.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

@@ -1,6 +1,6 @@
 package com.SafetyNet.api.controller;
 
-import com.SafetyNet.api.Model.Person;
+import com.SafetyNet.api.model.Person;
 import com.SafetyNet.api.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -26,35 +26,32 @@ public class PersonController {
     }
 
 
-    @GetMapping(value = "/person/{firstNameAndlastName}")
-    public Person showPersonById(@PathVariable String firstNameAndlastName) throws Exception {
+    @GetMapping(value = "/person/{firstNameAndLastName}")
+    public Person showPersonById(@PathVariable String firstNameAndLastName) {
 
 
-        return personService.findById(firstNameAndlastName);
+        return personService.findById(firstNameAndLastName);
     }
 
     @PostMapping(value = "/person")
-    public List<Person> addPerson(@RequestBody Person person) throws Exception {
+    public List<Person> addPerson(@RequestBody Person person) {
 
-        List<Person> personList = personService.save(person);
-
-        return personList;
-
+        return personService.save(person);
 
     }
 
-    @PutMapping(value = "/person/{firstNameAndlastName}")
-    public Person updatePerson(@RequestBody Person person, @PathVariable String firstNameAndlastName) throws Exception {
+    @PutMapping(value = "/person/{firstNameAndLastName}")
+    public Person updatePerson(@RequestBody Person person, @PathVariable String firstNameAndLastName) {
 
-        Person personUpdated = personService.update(firstNameAndlastName, person);
 
-        return personUpdated;
+        return personService.update(firstNameAndLastName, person);
     }
 
 
-    @DeleteMapping(value = "/person/{firstNameAndlastName}")
-    public List<Person> deletePerson(@PathVariable String firstNameAndlastName) throws Exception {
-      return   personService.deleteById(firstNameAndlastName);
+    @DeleteMapping(value = "/person/{firstNameAndLastName}")
+    public List<Person> deletePerson(@PathVariable String firstNameAndLastName) {
+
+        return personService.deleteById(firstNameAndLastName);
 
     }
 }

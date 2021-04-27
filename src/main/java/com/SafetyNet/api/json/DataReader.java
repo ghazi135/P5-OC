@@ -1,9 +1,9 @@
 package com.SafetyNet.api.json;
 
 
-import com.SafetyNet.api.Model.Firestation;
-import com.SafetyNet.api.Model.MedicalRecord;
-import com.SafetyNet.api.Model.Person;
+import com.SafetyNet.api.model.Firestation;
+import com.SafetyNet.api.model.MedicalRecord;
+import com.SafetyNet.api.model.Person;
 
 import java.util.List;
 
