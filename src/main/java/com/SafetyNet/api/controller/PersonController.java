@@ -14,15 +14,14 @@ import java.util.List;
 public class PersonController {
 
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(PersonController.class);
-    @Autowired
-    private              ObjectMapper                    mapper;
+
     @Autowired
     private              PersonService                   personService;
 
     @GetMapping(value = "/person")
-    public String showAllPersons() throws Exception {
+    public List<Person> showAllPersons() throws Exception {
 
-        return mapper.writeValueAsString(personService.findAll());
+        return personService.findAll();
     }
 
 

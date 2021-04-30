@@ -12,9 +12,8 @@ public class PersonDaoImpl implements PersonDao {
 
     private List<Person> persons;
 
-    public PersonDaoImpl() {
+    public PersonDaoImpl() { }
 
-    }
     @Autowired
     public PersonDaoImpl(List<Person> person) throws Exception {
         super();
