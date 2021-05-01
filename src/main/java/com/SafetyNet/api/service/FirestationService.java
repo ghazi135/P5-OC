@@ -37,7 +37,8 @@ public class FirestationService {
         return firestationDao.update(address, firestation);
     }
 
-    public void deleteById(String address) {
+    public List<Firestation> deleteById(String address) {
         firestationDao.deleteById(address);
+      return  firestationDao.findAll();
     }
 }

@@ -86,7 +86,7 @@ public class FirestationServiceTest {
         firestation.setStation(10);
         firestation.setAddress("15 rue colonel dumont ");
         firestationDAO.save(firestation);
-        firestationDAO.deleteById("15 rue colonel dumont ");
+        firestationService.deleteById("15 rue colonel dumont ");
         assertThat(firestationService.findAll().toString(), containsString(""));
     }
 

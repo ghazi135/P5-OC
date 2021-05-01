@@ -106,7 +106,6 @@ public class FirestationControllerTest {
     @Test
     public void deleteFirestation() throws Exception {
 
-        Mockito.doNothing().when(firestationService).deleteById("firstNameAndlastName");
         MvcResult mvcResult = mockMvc.perform(delete("/firestation/Somewhere")).andDo(print()).andReturn();
         int status = mvcResult.getResponse().getStatus();
 
