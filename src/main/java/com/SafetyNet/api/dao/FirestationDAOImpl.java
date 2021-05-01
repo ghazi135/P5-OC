@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class FirestationDaoImpl  implements FirestationDao{
+public class FirestationDAOImpl implements FirestationDAO {
 
     private final List<Firestation> firestations;
 
     @Autowired
-    public FirestationDaoImpl(List<Firestation> firestion) throws Exception {
+    public FirestationDAOImpl(List<Firestation> firestion) throws Exception {
         super();
         firestion = new DataReaderService().getData().getFirestations();
         this.firestations = firestion;

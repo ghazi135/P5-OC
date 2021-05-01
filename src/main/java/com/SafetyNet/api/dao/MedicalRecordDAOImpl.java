@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class MedicalRecordDaoImpl implements MedicalRecordDAO {
+public class MedicalRecordDAOImpl implements MedicalRecordDAO {
 
     private final List<MedicalRecord> medicalRecords;
 
     @Autowired
-    public MedicalRecordDaoImpl(List<MedicalRecord> medicalRecord) throws Exception {
+    public MedicalRecordDAOImpl(List<MedicalRecord> medicalRecord) throws Exception {
         super();
         medicalRecord = new DataReaderService().getData().getMedicalRecords();
         this.medicalRecords = medicalRecord;

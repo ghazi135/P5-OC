@@ -8,14 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PersonDaoImpl implements PersonDao {
+public class PersonDAOImpl implements PersonDAO {
 
     private List<Person> persons;
 
-    public PersonDaoImpl() { }
+
+    public PersonDAOImpl() { }
 
     @Autowired
-    public PersonDaoImpl(List<Person> person) throws Exception {
+    public PersonDAOImpl(List<Person> person) throws Exception {
         super();
         person       = new DataReaderService().getData().getPersons();
         this.persons = person;

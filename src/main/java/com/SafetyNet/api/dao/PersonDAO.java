@@ -4,7 +4,7 @@ import com.SafetyNet.api.model.Person;
 
 import java.util.List;
 
-public interface PersonDao {
+public interface PersonDAO {
 
     public List<Person> findAll();
 

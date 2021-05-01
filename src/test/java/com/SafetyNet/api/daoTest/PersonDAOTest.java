@@ -1,8 +1,7 @@
-package com.SafetyNet.api;
+package com.SafetyNet.api.daoTest;
 
 import com.SafetyNet.api.model.Person;
-import com.SafetyNet.api.dao.PersonDaoImpl;
-import org.hamcrest.MatcherAssert;
+import com.SafetyNet.api.dao.PersonDAOImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,13 +13,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.not;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class PersonDaoTest {
+public class PersonDAOTest {
     private List<Person>  listPersons;
-    private PersonDaoImpl personDaoImpl;
+    private PersonDAOImpl personDaoImpl;
 
     @BeforeEach
     public void setUp() throws Exception {
-        personDaoImpl = new PersonDaoImpl(listPersons);
+        personDaoImpl = new PersonDAOImpl(listPersons);
     }
 
     @Test

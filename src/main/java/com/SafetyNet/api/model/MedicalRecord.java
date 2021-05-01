@@ -9,9 +9,8 @@ import java.util.List;
 public class MedicalRecord {
 
     private String firstName;
-    private String lastName;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
-    private Date birthdate;
+    private String       lastName;
+    private String       birthdate;
     private List<String> medications;
     private List<String> allergies;
     @JsonIgnore
@@ -20,7 +19,7 @@ public class MedicalRecord {
     public MedicalRecord() {
     }
 
-    public MedicalRecord(String firstName, String lastName, Date birthdate, List<String> medications,
+    public MedicalRecord(String firstName, String lastName, String birthdate, List<String> medications,
             List<String> allergies, String firstNameAndlastName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -46,11 +45,11 @@ public class MedicalRecord {
         this.lastName = lastName;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 

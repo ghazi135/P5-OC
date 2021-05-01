@@ -2,7 +2,6 @@ package com.SafetyNet.api.controller;
 
 import com.SafetyNet.api.model.Person;
 import com.SafetyNet.api.service.PersonService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class PersonController {
     private              PersonService                   personService;
 
     @GetMapping(value = "/person")
-    public List<Person> showAllPersons() throws Exception {
+    public List<Person> showAllPersons() {
 
         return personService.findAll();
     }

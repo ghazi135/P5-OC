@@ -1,4 +1,4 @@
-package com.SafetyNet.api;
+package com.SafetyNet.api.controllerTest;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;

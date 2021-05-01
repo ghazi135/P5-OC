@@ -4,7 +4,7 @@ import com.SafetyNet.api.model.Firestation;
 
 import java.util.List;
 
-public interface FirestationDao {
+public interface FirestationDAO {
 
     public List<Firestation> findAll();
 

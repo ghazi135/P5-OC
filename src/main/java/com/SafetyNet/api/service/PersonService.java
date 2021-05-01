@@ -1,7 +1,7 @@
 package com.SafetyNet.api.service;
 
 import com.SafetyNet.api.model.Person;
-import com.SafetyNet.api.dao.PersonDao;
+import com.SafetyNet.api.dao.PersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,13 @@ import java.util.List;
 @Service
 public class PersonService {
 
+    @Autowired
+    private PersonDAO personDAO ;
 
     @Autowired
-    private PersonDao personDAO ;
+public PersonService( PersonDAO personDAO) {
+    this.personDAO = personDAO;
+}
 
 
     public List<Person> findAll()  {
