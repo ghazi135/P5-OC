@@ -1,7 +1,7 @@
 package com.SafetyNet.api.service;
 
-import com.SafetyNet.api.model.Person;
 import com.SafetyNet.api.dao.PersonDAO;
+import com.SafetyNet.api.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,38 +11,40 @@ import java.util.List;
 public class PersonService {
 
     @Autowired
-    private PersonDAO personDAO ;
+    private final PersonDAO personDAO;
 
     @Autowired
-public PersonService( PersonDAO personDAO) {
-    this.personDAO = personDAO;
-}
+    public PersonService(PersonDAO personDAO) {
 
+        this.personDAO = personDAO;
+    }
 
-    public List<Person> findAll()  {
+    public List<Person> findAll() {
 
 
         return personDAO.findAll();
     }
 
-    public Person findById(String address)  {
+    public Person findById(String address) {
 
-        return  personDAO.findById(address);
+        return personDAO.findById(address);
     }
-//
-    public List<Person> save(Person person)  {
+
+    //
+    public List<Person> save(Person person) {
 
         personDAO.save(person);
 
-        return  personDAO.findAll();
+        return personDAO.findAll();
     }
-//
-    public Person update(String address, Person person)  {
+
+    //
+    public Person update(String address, Person person) {
 
         return personDAO.update(address, person);
     }
 
-    public List<Person> deleteById(String id)  {
+    public List<Person> deleteById(String id) {
 
         personDAO.deleteById(id);
         return personDAO.findAll();

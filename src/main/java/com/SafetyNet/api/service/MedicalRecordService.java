@@ -13,6 +13,13 @@ public class MedicalRecordService {
     @Autowired
     private MedicalRecordDAO medicalRecordDAO;
 
+    @Autowired
+    public MedicalRecordService(MedicalRecordDAO medicalRecordDAO) {
+
+        this.medicalRecordDAO = medicalRecordDAO;
+
+    }
+
     public List<MedicalRecord> findAll() {
         return medicalRecordDAO.findAll();
     }
@@ -23,6 +30,7 @@ public class MedicalRecordService {
     }
 
     public List<MedicalRecord> save(MedicalRecord medicalRecord) {
+
         return  medicalRecordDAO.save(medicalRecord);
     }
 

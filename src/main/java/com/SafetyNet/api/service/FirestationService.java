@@ -13,6 +13,11 @@ public class FirestationService {
     @Autowired
     private FirestationDAO firestationDao;
 
+    @Autowired
+    public FirestationService(FirestationDAO firestationDAO) {
+        this.firestationDao = firestationDAO;
+    }
+
     public List<Firestation> findAll() {
 
         return firestationDao.findAll();
@@ -24,7 +29,8 @@ public class FirestationService {
     }
 
     public List<Firestation> save(Firestation firestation) {
-        return  firestationDao.save(firestation);
+        firestationDao.save(firestation);
+        return  firestationDao.findAll();
     }
 
     public Firestation update(String address, Firestation firestation) {
