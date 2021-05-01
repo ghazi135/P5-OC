@@ -5,6 +5,7 @@ import com.SafetyNet.api.model.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 

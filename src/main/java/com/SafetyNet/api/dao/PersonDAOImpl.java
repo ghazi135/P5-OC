@@ -39,17 +39,7 @@ public class PersonDAOImpl implements PersonDAO {
         return null;
     }
 
-    @Override
-    public List<Person> findByLastName(String lastName) {
 
-        List<Person> listPerson = new ArrayList<Person>();
-        for (Person person : persons) {
-            if ((person.getLastName()).equals(lastName)) {
-                listPerson.add(person);
-            }
-        }
-        return listPerson;
-    }
 
     @Override
     public List<Person> findByAddress(String address) {
@@ -58,6 +48,7 @@ public class PersonDAOImpl implements PersonDAO {
         for (Person person : persons) {
             if ((person.getAddress()).equals(address)) {
                 listPerson.add(person);
+                
             }
         }
         return listPerson;

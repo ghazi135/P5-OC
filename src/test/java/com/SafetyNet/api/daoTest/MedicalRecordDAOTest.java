@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class MedicalRecordDAOTest {
     }
 
     @Test
-    public void update() {
+    public void update() throws ParseException {
         // ARRANGE
         MedicalRecord medicalRecord = new MedicalRecord(); // parameter
         String firstNameAndlastName = "JohnBoyd"; // parameter

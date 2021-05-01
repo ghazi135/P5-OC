@@ -5,6 +5,7 @@ import com.SafetyNet.api.model.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -34,7 +35,7 @@ public class MedicalRecordService {
         return  medicalRecordDAO.save(medicalRecord);
     }
 
-    public MedicalRecord update(String address, MedicalRecord medicalRecord) {
+    public MedicalRecord update(String address, MedicalRecord medicalRecord) throws ParseException {
         return medicalRecordDAO.update(address, medicalRecord);
     }
 

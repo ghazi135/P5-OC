@@ -5,6 +5,7 @@ import com.SafetyNet.api.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class MedicalRecordController {
 
     @PutMapping(value = "/medicalRecord/{firstNameAndlastName}")
     public MedicalRecord updateMedicalRecord(@RequestBody MedicalRecord medicalRecord,
-            @PathVariable String firstNameAndlastName) {
+            @PathVariable String firstNameAndlastName) throws ParseException {
         return medicalRecordService.update(firstNameAndlastName, medicalRecord);
     }
 

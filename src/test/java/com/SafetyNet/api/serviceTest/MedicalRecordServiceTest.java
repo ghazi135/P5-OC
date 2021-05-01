@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +100,7 @@ import static org.mockito.Mockito.when;
         }
 
         @Test
-        public void updateMedicalRecordTest(){
+        public void updateMedicalRecordTest() throws ParseException {
             MedicalRecord medicalRecord = new MedicalRecord();
             List<String> medication = new ArrayList<String>();
             List<String> allergie = new ArrayList<String>();
