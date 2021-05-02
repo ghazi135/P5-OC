@@ -58,9 +58,11 @@ public class PersonDAOImpl implements PersonDAO {
     public List<Person> findEmailByCity(String city) {
 
         List<Person> listPerson = new ArrayList<Person>();
+        List<String> mail = new ArrayList<String>();
         for (Person person : persons) {
             if ((person.getCity()).equals(city)) {
                 listPerson.add(person);
+
             }
         }
         return listPerson;
