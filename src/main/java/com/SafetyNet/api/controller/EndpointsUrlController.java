@@ -5,6 +5,8 @@ import com.SafetyNet.api.model.Person;
 import com.SafetyNet.api.service.EndpointUrlService;
 import com.SafetyNet.api.service.object.ChildrenByAdressObject;
 import com.SafetyNet.api.service.object.EndpointsUrlsObject;
+import com.SafetyNet.api.service.object.ListPersonByAdressObject;
+import com.SafetyNet.api.service.object.PhoneAlertByStationNumberObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,5 +57,20 @@ public class EndpointsUrlController {
         return new EndpointsUrlsObject(email);
     }
 
+    @GetMapping(value = "/phoneAlert{stationNumber}")
+    public PhoneAlertByStationNumberObject getPhoneNumbersByFirestation(@PathVariable int stationNumber) {
 
-}
+        return endpointUrlService.getPhoneNumbersByFirestation(stationNumber);
+        }
+
+    @GetMapping(value = "/fire{address}")
+    public ListPersonByAdressObject getPersonsByAddress(@PathVariable String address) throws ParseException {
+
+        return endpointUrlService.getPersonsByAddress(address);
+    }
+
+    }
+
+
+
+

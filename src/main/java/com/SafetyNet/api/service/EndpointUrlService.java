@@ -8,6 +8,8 @@ import com.SafetyNet.api.model.MedicalRecord;
 import com.SafetyNet.api.model.Person;
 import com.SafetyNet.api.service.object.ChildrenByAdressObject;
 import com.SafetyNet.api.service.object.EndpointsUrlsObject;
+import com.SafetyNet.api.service.object.ListPersonByAdressObject;
+import com.SafetyNet.api.service.object.PhoneAlertByStationNumberObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,4 +69,41 @@ public class EndpointUrlService {
         return new ChildrenByAdressObject(listPersonLocal, listMedicalRecords, ages.getListAge(),
                 ages.getChildren());
     }
+
+    public PhoneAlertByStationNumberObject getPhoneNumbersByFirestation(int firestation) {
+
+        List<Person> listPersonLocal = new ArrayList<Person>();
+        List<String> listPhones = new ArrayList<String>();
+        for (Firestation firestation1 : firestationDAO.findAddressByStation(firestation)) {
+            listPersonLocal.addAll(personDAO.findByAddress(firestation1.getAddress()));
+        }
+        for (Person person : listPersonLocal) {
+        listPhones.add(person.getPhone());
+        }
+
+
+
+        return  new PhoneAlertByStationNumberObject(listPhones);
+    }
+
+
+    public ListPersonByAdressObject getPersonsByAddress(String address) throws ParseException {
+        Firestation firestationLocal = firestationDAO.findById(address);
+
+        List<Person> listPersonLocal = new ArrayList<Person>();
+        List<Person> listPerson2 = personDAO.findByAddress(firestationLocal.getAddress());
+        listPersonLocal.addAll(listPerson2);
+
+        Ages ages = new Ages();
+        List<MedicalRecord> listMedicalRecordsLocal = new ArrayList<MedicalRecord>();
+        for (Person person : listPerson2) {
+            MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
+            listMedicalRecordsLocal.add(medicalRecord);
+            ages.calculateDate(medicalRecord.getBirthdate());
+        }
+
+        return new ListPersonByAdressObject(listPersonLocal, listMedicalRecordsLocal, firestationLocal,
+                ages.getListAge());
+    }
+
 }
