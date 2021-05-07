@@ -65,10 +65,10 @@ public class MedicalRecordDAOImpl implements MedicalRecordDAO {
     }
 
     @Override
-    public MedicalRecord update(String firstNameAndlastName, MedicalRecord medicalRecord) {
+    public MedicalRecord update(String firstNameAndlastName, MedicalRecord medicalRecord) throws ParseException {
         for (MedicalRecord updateMedicalRecord : medicalRecords) {
             if (updateMedicalRecord.getFirstNameAndlastName().equals(firstNameAndlastName)) {
-                updateMedicalRecord.setBirthdate(medicalRecord.getBirthdate());
+                updateMedicalRecord.setBirthdate(medicalRecord.getBirthdate().toString());
                 updateMedicalRecord.setMedications(medicalRecord.getMedications());
                 updateMedicalRecord.setAllergies(medicalRecord.getAllergies());
                 return updateMedicalRecord;

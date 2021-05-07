@@ -10,6 +10,8 @@ public interface PersonDAO {
 
     public Person findById(String firstNameAndlastName);
 
+    public List<Person> findByLastName(String lastName);
+
     public List<Person> findByAddress(String address);
 
     public List<Person> findEmailByCity(String city);
