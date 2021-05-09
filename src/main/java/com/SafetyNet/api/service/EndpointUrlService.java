@@ -6,10 +6,7 @@ import com.SafetyNet.api.dao.PersonDAO;
 import com.SafetyNet.api.model.Firestation;
 import com.SafetyNet.api.model.MedicalRecord;
 import com.SafetyNet.api.model.Person;
-import com.SafetyNet.api.service.object.ChildrenByAdressObject;
-import com.SafetyNet.api.service.object.EndpointsUrlsObject;
-import com.SafetyNet.api.service.object.ListPersonByAdressObject;
-import com.SafetyNet.api.service.object.PhoneAlertByStationNumberObject;
+import com.SafetyNet.api.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,16 +24,16 @@ public class EndpointUrlService {
     @Autowired
     private MedicalRecordDAO medicalRecordDAO;
 
-
+    private Ages ages = new Ages();
     public List<Person> getMailsByCity(String city) {
 
         return  personDAO.findEmailByCity(city);
     }
 
 
-    public EndpointsUrlsObject getPersonsByFirestation(int stationNumber) throws ParseException {
+    public PersonByFirestationDTO getPersonsByFirestation(int stationNumber) throws ParseException {
 
-        Ages ages = new Ages();
+         ages = new Ages();
         List<Person> listPersonLocal = new ArrayList<Person>();
         for (Firestation firestation : firestationDAO.findAddressByStation(stationNumber)) {
             List<Person> listPersonTmp = personDAO.findByAddress(firestation.getAddress());
@@ -47,18 +44,18 @@ public class EndpointUrlService {
                 ages.calculateDate(medicalRecord.getBirthdate());
             }
         }
-        return new EndpointsUrlsObject(listPersonLocal,
+        return new PersonByFirestationDTO(listPersonLocal,
                 ages.getAdults(),
                 ages.getChildren());
     }
 
-    public ChildrenByAdressObject showChildrenByAddress(String address) throws ParseException {
+    public ChildrenByAdressDTO showChildrenByAddress(String address) throws ParseException {
 
         List<Person> listPersonLocal = new ArrayList<Person>();
         List<Person> listPerson2 = personDAO.findByAddress(address);
         listPersonLocal.addAll(listPerson2);
 
-        Ages ages = new Ages();
+         ages = new Ages();
         List<MedicalRecord> listMedicalRecords = new ArrayList<MedicalRecord>();
         for (Person person : listPerson2) {
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
@@ -66,11 +63,11 @@ public class EndpointUrlService {
             ages.calculateDate(medicalRecord.getBirthdate());
         }
 
-        return new ChildrenByAdressObject(listPersonLocal, listMedicalRecords, ages.getListAge(),
+        return new ChildrenByAdressDTO(listPersonLocal, listMedicalRecords, ages.getListAge(),
                 ages.getChildren());
     }
 
-    public PhoneAlertByStationNumberObject getPhoneNumbersByFirestation(int firestation) {
+    public PhoneAlertByStationNumberDTO getPhoneNumbersByFirestation(int firestation) {
 
         List<Person> listPersonLocal = new ArrayList<Person>();
         List<String> listPhones = new ArrayList<String>();
@@ -83,18 +80,18 @@ public class EndpointUrlService {
 
 
 
-        return  new PhoneAlertByStationNumberObject(listPhones);
+        return  new PhoneAlertByStationNumberDTO(listPhones);
     }
 
 
-    public ListPersonByAdressObject getPersonsByAddress(String address) throws ParseException {
+    public ListPersonByAdressDTO getPersonsByAddress(String address) throws ParseException {
         Firestation firestationLocal = firestationDAO.findById(address);
 
         List<Person> listPersonLocal = new ArrayList<Person>();
         List<Person> listPerson2 = personDAO.findByAddress(firestationLocal.getAddress());
         listPersonLocal.addAll(listPerson2);
 
-        Ages ages = new Ages();
+         ages = new Ages();
         List<MedicalRecord> listMedicalRecordsLocal = new ArrayList<MedicalRecord>();
         for (Person person : listPerson2) {
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
@@ -102,8 +99,45 @@ public class EndpointUrlService {
             ages.calculateDate(medicalRecord.getBirthdate());
         }
 
-        return new ListPersonByAdressObject(listPersonLocal, listMedicalRecordsLocal, firestationLocal,
+        return new ListPersonByAdressDTO(listPersonLocal, listMedicalRecordsLocal, firestationLocal,
                 ages.getListAge());
     }
+
+    public PersonsAddressByFirestationDTO showPersonsAddressByFirestation(int stations) throws ParseException {
+
+
+        Ages ages = new Ages();
+        List<Person> listPersonLocal = new ArrayList<Person>();
+        for (Firestation firestation : firestationDAO.findAddressByStation(stations)) {
+            List<Person> listPerson2 = personDAO.findByAddress(firestation.getAddress());
+            listPersonLocal.addAll(listPerson2);
+        }
+
+        List<MedicalRecord> listMedicalRecordsLocal = new ArrayList<MedicalRecord>();
+        for (Person person : listPersonLocal) {
+            MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
+            listMedicalRecordsLocal.add(medicalRecord);
+            ages.calculateDate(medicalRecord.getBirthdate());
+        }
+
+        return new PersonsAddressByFirestationDTO(listPersonLocal, listMedicalRecordsLocal, ages.getListAge());
+    }
+
+    public PersonInfoDTO showPersonInfoByPerson(String firstName, String lastName) throws ParseException {
+
+        List<Person> listPerson2 = personDAO.findByLastName(lastName);
+        List<Person> listPersonLocal = new ArrayList<Person>(listPerson2);
+
+        ages = new Ages();
+        List<MedicalRecord> listMedicalRecordsLocal = new ArrayList<MedicalRecord>();
+        for (Person person : listPersonLocal) {
+            MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
+            listMedicalRecordsLocal.add(medicalRecord);
+            ages.calculateDate(medicalRecord.getBirthdate());
+        }
+
+        return new PersonInfoDTO(listPersonLocal, listMedicalRecordsLocal, ages.getListAge());
+    }
+
 
 }

@@ -1,12 +1,11 @@
-package com.SafetyNet.api.service.object;
+package com.SafetyNet.api.DTO;
 
-import com.SafetyNet.api.model.Firestation;
 import com.SafetyNet.api.model.MedicalRecord;
 import com.SafetyNet.api.model.Person;
 
 import java.util.List;
 
-public class ChildrenByAdressObject {
+public class ChildrenByAdressDTO {
 
 
 
@@ -19,7 +18,7 @@ public class ChildrenByAdressObject {
     private static long children;
 
 
-    public ChildrenByAdressObject(List<Person> listPersons, List<MedicalRecord> listMedicalRecords, List<Long> age,
+    public ChildrenByAdressDTO(List<Person> listPersons, List<MedicalRecord> listMedicalRecords, List<Long> age,
             long children) {
         super();
         this.listPersons = listPersons;

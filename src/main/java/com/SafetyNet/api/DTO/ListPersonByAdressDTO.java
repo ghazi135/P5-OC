@@ -1,4 +1,4 @@
-package com.SafetyNet.api.service.object;
+package com.SafetyNet.api.DTO;
 
 import com.SafetyNet.api.model.Firestation;
 import com.SafetyNet.api.model.MedicalRecord;
@@ -6,7 +6,7 @@ import com.SafetyNet.api.model.Person;
 
 import java.util.List;
 
-public class ListPersonByAdressObject {
+public class ListPersonByAdressDTO {
 
     List<Person> personList;
     List<MedicalRecord> medicalRecordList;
@@ -14,7 +14,7 @@ public class ListPersonByAdressObject {
     List<Long>  agesList;
 
 
-    public ListPersonByAdressObject(List<Person> personList, List<MedicalRecord> medicalRecordList, Firestation firestation, List<Long> agesList) {
+    public ListPersonByAdressDTO(List<Person> personList, List<MedicalRecord> medicalRecordList, Firestation firestation, List<Long> agesList) {
 
         this.personList = personList;
         this.medicalRecordList = medicalRecordList;

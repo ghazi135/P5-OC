@@ -3,13 +3,11 @@ package com.SafetyNet.api.controller;
 
 import com.SafetyNet.api.model.Person;
 import com.SafetyNet.api.service.EndpointUrlService;
-import com.SafetyNet.api.service.object.ChildrenByAdressObject;
-import com.SafetyNet.api.service.object.EndpointsUrlsObject;
-import com.SafetyNet.api.service.object.ListPersonByAdressObject;
-import com.SafetyNet.api.service.object.PhoneAlertByStationNumberObject;
+import com.SafetyNet.api.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
@@ -27,17 +25,17 @@ public class EndpointsUrlController {
 
 
     @GetMapping(value = "/firestation{stationNumber}")
-    public EndpointsUrlsObject getPersonsByFirestation(@PathVariable int stationNumber) throws ParseException {
+    public PersonByFirestationDTO getPersonsByFirestation(@PathVariable int stationNumber) throws ParseException {
 
         return endpointUrlService.getPersonsByFirestation(stationNumber);
     }
 
 
     @GetMapping(value = "/childAlert{address}")
-    public ChildrenByAdressObject showChildrenByAddress(@PathVariable String address) throws ParseException {
+    public ChildrenByAdressDTO showChildrenByAddress(@PathVariable String address) throws ParseException {
 
-        ChildrenByAdressObject childrenByAdressObject = endpointUrlService.showChildrenByAddress(address);
-        long                   children               = ChildrenByAdressObject.getChildren();
+        ChildrenByAdressDTO childrenByAdressObject = endpointUrlService.showChildrenByAddress(address);
+        long                children               = ChildrenByAdressDTO.getChildren();
         if (children == 0) {
             return null;
         } else {
@@ -48,28 +46,45 @@ public class EndpointsUrlController {
 
 
     @GetMapping(value = "/communityEmail/{city}")
-    public EndpointsUrlsObject getMailsByCity(@PathVariable String city) {
+    public EmailDTO getMailsByCity(@PathVariable String city) {
 
-        List<String> email = new ArrayList<String>();
+        List<String> email = new ArrayList<>();
         for (Person person : endpointUrlService.getMailsByCity(city)) {
             email.add(person.getEmail());
         }
-        return new EndpointsUrlsObject(email);
+        return new EmailDTO(email);
     }
 
     @GetMapping(value = "/phoneAlert{stationNumber}")
-    public PhoneAlertByStationNumberObject getPhoneNumbersByFirestation(@PathVariable int stationNumber) {
+    public PhoneAlertByStationNumberDTO getPhoneNumbersByFirestation(@PathVariable int stationNumber) {
 
         return endpointUrlService.getPhoneNumbersByFirestation(stationNumber);
-        }
+    }
 
     @GetMapping(value = "/fire{address}")
-    public ListPersonByAdressObject getPersonsByAddress(@PathVariable String address) throws ParseException {
+    public ListPersonByAdressDTO getPersonsByAddress(@PathVariable String address) throws ParseException {
 
         return endpointUrlService.getPersonsByAddress(address);
     }
 
+    @GetMapping(value = "/flood/stations{stations}")
+    public PersonsAddressByFirestationDTO showPersonsAddressByFirestation(@PathVariable int stations) throws ParseException {
+
+        return endpointUrlService.showPersonsAddressByFirestation(stations);
     }
+
+
+    @GetMapping(value = "/personInfo{firstName}{lastName}")
+    public PersonInfoDTO showPersonInfoByPerson(@RequestParam(value = "firstName") String firstName,
+            @RequestParam(value = "lastName") String lastName) throws ParseException {
+
+        return endpointUrlService.showPersonInfoByPerson(firstName, lastName);
+    }
+
+
+
+
+}
 
 
 

@@ -1,5 +1,6 @@
 package com.SafetyNet.api.model;
 
+import com.SafetyNet.api.dao.FirestationDAOImpl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.text.ParseException;

@@ -1,14 +1,14 @@
-package com.SafetyNet.api.service.object;
+package com.SafetyNet.api.DTO;
 
 import java.util.List;
 
-public class PhoneAlertByStationNumberObject {
+public class PhoneAlertByStationNumberDTO {
 
 
     private final List<String> phonePersonList;
 
 
-    public PhoneAlertByStationNumberObject(List<String> phonePersonList) {
+    public PhoneAlertByStationNumberDTO(List<String> phonePersonList) {
 
         this.phonePersonList = phonePersonList;
     }
