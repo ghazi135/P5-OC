@@ -1,6 +1,5 @@
 package com.SafetyNet.api.model;
 
-import com.SafetyNet.api.dao.FirestationDAOImpl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.text.ParseException;
@@ -52,10 +51,10 @@ public class MedicalRecord {
         this.lastName = lastName;
     }
 
-    public Date getBirthdate() throws ParseException {
-
-        Date date1 =new SimpleDateFormat("MM/dd/yyyy").parse(birthdate);
-        return date1;
+    public String getBirthdate() throws ParseException {
+//
+//        Date date1 =new SimpleDateFormat("MM/dd/yyyy").parse();
+        return birthdate;
     }
 
     public void setBirthdate(String birthdate) {

@@ -1,39 +1,59 @@
 package com.SafetyNet.api.dto;
 
-import com.SafetyNet.api.model.MedicalRecord;
-import com.SafetyNet.api.model.Person;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
 public class PersonInfoDTO {
-    @JsonIgnoreProperties({"firstName", "city", "zip", "phone"})
-    private final List<Person>        listPersons;
-    @JsonIgnoreProperties({"firstName","lastName","birthdate"})
-    private final List<MedicalRecord> listMedicalRecords;
-    private final List<Long>          age;
 
-    public PersonInfoDTO(List<Person> listPersons, List<MedicalRecord> listMedicalRecords, List<Long> age) {
+    private  String       lastName;
+    private  String       address;
+    private Long         age;
+    private String       email;
+    private List<String> medications;
+    private List<String> allergies;
 
-        this.listPersons        = listPersons;
-        this.listMedicalRecords = listMedicalRecords;
-        this.age = age;
 
+    public PersonInfoDTO( String lastName, String address, String email, Long age,List<String> medications, List<String> allergies) {
+
+        this.lastName             = lastName;
+        this.address              = address;
+        this.email                = email;
+        this.age   = age;
+        this.medications = medications;
+        this.allergies   = allergies;
     }
 
-    public List<Person> getListPersons() {
 
-        return listPersons;
+    public String getLastName() {
+
+        return lastName;
     }
 
-    public List<MedicalRecord> getListMedicalRecords() {
-
-        return listMedicalRecords;
-    }
-
-    public List<Long> getAge() {
+    public Long getAge() {
 
         return age;
     }
+
+
+    public String getAddress() {
+
+        return address;
+    }
+
+
+    public String getEmail() {
+
+        return email;
+    }
+    public List<String> getMedications() {
+
+        return medications;
+    }
+
+    public List<String> getAllergies() {
+
+        return allergies;
+    }
+
 
 }

@@ -1,52 +1,33 @@
 package com.SafetyNet.api.dto;
 
-import com.SafetyNet.api.model.MedicalRecord;
-import com.SafetyNet.api.model.Person;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.List;
-
 public class ChildrenByAdressDTO {
 
 
-    @JsonIgnoreProperties({"address", "email", "city", "zip", "phone"})
-    private final List<Person>        listPersons;
-    @JsonIgnore
-    private final  List<MedicalRecord> listMedicalRecords;
-    private final  List<Long>          age;
-    private static long                children;
+
+    private final String firstName;
+    private final String lastName;
+    private final Long   age;
+
+ public ChildrenByAdressDTO(String firstName,String lastName, Long age) {
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age       = age;
+}
 
 
-    public ChildrenByAdressDTO(List<Person> listPersons, List<MedicalRecord> listMedicalRecords, List<Long> age, long children) {
+    public String getFirstName() {
 
-        super();
-        this.listPersons        = listPersons;
-        this.listMedicalRecords = listMedicalRecords;
-        this.age                = age;
-        this.children           = children;
+        return firstName;
     }
 
+    public String getLastName() {
 
-    public List<Person> getListPersons() {
-
-        return listPersons;
+        return lastName;
     }
 
-    public List<MedicalRecord> getListMedicalRecords() {
-
-        return listMedicalRecords;
-    }
-
-    public List<Long> getAge() {
+    public Long getAge() {
 
         return age;
     }
-
-    public static long getChildren() {
-
-        return children;
-    }
-
-
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +24,8 @@ public class EndpointUrlService {
     private FirestationDAO   firestationDAO;
     @Autowired
     private MedicalRecordDAO medicalRecordDAO;
-    private PersonDTO personDTO;
-    private Ages ages = new Ages();
+    private PersonInfoDTO    personDTO;
+    private Ages             ages = new Ages();
     public List<Person> getMailsByCity(String city) {
 
         return  personDAO.findEmailByCity(city);
@@ -41,7 +42,7 @@ public class EndpointUrlService {
 
             for (Person person : listPersonTmp) {
                 MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
-                ages.calculateDate(medicalRecord.getBirthdate());
+                ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
             }
         }
         return new PersonByFirestationDTO(listPersonLocal,
@@ -49,22 +50,27 @@ public class EndpointUrlService {
                 ages.getChildren());
     }
 
-    public ChildrenByAdressDTO showChildrenByAddress(String address) throws ParseException {
+    public List<ChildrenByAdressDTO> showChildrenByAddress(String address) throws ParseException {
 
-        List<Person> listPersonLocal = new ArrayList<Person>();
+        List<ChildrenByAdressDTO> childrenByAdressDTOList = new ArrayList<ChildrenByAdressDTO>();
         List<Person> listPerson2 = personDAO.findByAddress(address);
-        listPersonLocal.addAll(listPerson2);
-
-         ages = new Ages();
+        ages = new Ages();
         List<MedicalRecord> listMedicalRecords = new ArrayList<MedicalRecord>();
         for (Person person : listPerson2) {
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
             listMedicalRecords.add(medicalRecord);
-            ages.calculateDate(medicalRecord.getBirthdate());
+            ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
+            childrenByAdressDTOList.add(new ChildrenByAdressDTO(person.getFirstName(),person.getLastName(),ages.getAge()));
+        }
+        if(ages.getChildren() == 0){
+            return null;
+        }
+        else
+        {
+            return childrenByAdressDTOList;
         }
 
-        return new ChildrenByAdressDTO(listPersonLocal, listMedicalRecords, ages.getListAge(),
-                ages.getChildren());
+
     }
 
     public PhoneAlertByStationNumberDTO getPhoneNumbersByFirestation(int firestation) {
@@ -96,16 +102,16 @@ public class EndpointUrlService {
         for (Person person : listPerson2) {
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
             listMedicalRecordsLocal.add(medicalRecord);
-            ages.calculateDate(medicalRecord.getBirthdate());
+            ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
         }
 
         return new ListPersonByAdressDTO(listPersonLocal, listMedicalRecordsLocal, firestationLocal,
                 ages.getListAge());
     }
 
-    public PersonsAddressByFirestationDTO showPersonsAddressByFirestation(int stations) throws ParseException {
+    public List<PersonsAddressByFirestationDTO> showPersonsAddressByFirestation(int stations) throws ParseException {
 
-
+        List<PersonsAddressByFirestationDTO> personsAddressByFirestationDTOList = new ArrayList<PersonsAddressByFirestationDTO>();
         Ages ages = new Ages();
         List<Person> listPersonLocal = new ArrayList<Person>();
         for (Firestation firestation : firestationDAO.findAddressByStation(stations)) {
@@ -117,23 +123,24 @@ public class EndpointUrlService {
         for (Person person : listPersonLocal) {
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
             listMedicalRecordsLocal.add(medicalRecord);
-            ages.calculateDate(medicalRecord.getBirthdate());
+            ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
+            personsAddressByFirestationDTOList.add(new PersonsAddressByFirestationDTO(person.getLastName(),person.getPhone(),ages.getAge(),medicalRecord.getMedications(),medicalRecord.getAllergies()));
         }
 
-        return new PersonsAddressByFirestationDTO(listPersonLocal, listMedicalRecordsLocal, ages.getListAge());
+        return personsAddressByFirestationDTOList;
     }
 
-    public List<PersonDTO> showPersonInfoByPerson(String firstName, String lastName) throws ParseException {
+    public List<PersonInfoDTO> showPersonInfoByPerson(String firstName, String lastName) throws ParseException {
 
-        List<Person> listPerson2 = personDAO.findByLastName(lastName);
-        List<Person> listPersonLocal = new ArrayList<Person>(listPerson2);
-        List<PersonDTO>  personDTOList = new ArrayList<PersonDTO>();
+        List<Person>        listPerson2     = personDAO.findByLastName(lastName);
+        List<Person>        listPersonLocal = new ArrayList<Person>(listPerson2);
+        List<PersonInfoDTO> personDTOList   = new ArrayList<PersonInfoDTO>();
         ages = new Ages();
         for (Person person : listPersonLocal) {
 
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
-            ages.calculateDate(medicalRecord.getBirthdate());
-             personDTOList.add(new PersonDTO(person.getLastName(), person.getAddress(), person.getEmail(), ages.getAge(),medicalRecord.getAllergies(),medicalRecord.getMedications()));
+            ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
+             personDTOList.add(new PersonInfoDTO(person.getLastName(), person.getAddress(), person.getEmail(), ages.getAge(),medicalRecord.getAllergies(),medicalRecord.getMedications()));
         }
 
         return personDTOList;

@@ -32,16 +32,9 @@ public class EndpointsUrlController {
 
 
     @GetMapping(value = "/childAlert{address}")
-    public ChildrenByAdressDTO showChildrenByAddress(@PathVariable String address) throws ParseException {
+    public List<ChildrenByAdressDTO> showChildrenByAddress(@PathVariable String address) throws ParseException {
 
-        ChildrenByAdressDTO childrenByAdressDTO = endpointUrlService.showChildrenByAddress(address);
-        long                children               = ChildrenByAdressDTO.getChildren();
-        if (children == 0) {
-            return null;
-        } else {
-
-            return childrenByAdressDTO;
-        }
+       return endpointUrlService.showChildrenByAddress(address);
     }
 
 
@@ -68,14 +61,14 @@ public class EndpointsUrlController {
     }
 
     @GetMapping(value = "/flood/stations{stations}")
-    public PersonsAddressByFirestationDTO showPersonsAddressByFirestation(@PathVariable int stations) throws ParseException {
+    public List<PersonsAddressByFirestationDTO>  showPersonsAddressByFirestation(@PathVariable int stations) throws ParseException {
 
         return endpointUrlService.showPersonsAddressByFirestation(stations);
     }
 
 
     @GetMapping(value = "/personInfo{firstName}{lastName}")
-    public List<PersonDTO> showPersonInfoByPerson(@RequestParam(value = "firstName") String firstName,
+    public List<PersonInfoDTO> showPersonInfoByPerson(@RequestParam(value = "firstName") String firstName,
             @RequestParam(value = "lastName") String lastName) throws ParseException {
 
         return endpointUrlService.showPersonInfoByPerson(firstName, lastName);
