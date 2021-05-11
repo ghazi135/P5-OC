@@ -6,7 +6,7 @@ import com.SafetyNet.api.dao.PersonDAO;
 import com.SafetyNet.api.model.Firestation;
 import com.SafetyNet.api.model.MedicalRecord;
 import com.SafetyNet.api.model.Person;
-import com.SafetyNet.api.DTO.*;
+import com.SafetyNet.api.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class EndpointUrlService {
     private FirestationDAO   firestationDAO;
     @Autowired
     private MedicalRecordDAO medicalRecordDAO;
-
+    private PersonDTO personDTO;
     private Ages ages = new Ages();
     public List<Person> getMailsByCity(String city) {
 
@@ -123,20 +123,20 @@ public class EndpointUrlService {
         return new PersonsAddressByFirestationDTO(listPersonLocal, listMedicalRecordsLocal, ages.getListAge());
     }
 
-    public PersonInfoDTO showPersonInfoByPerson(String firstName, String lastName) throws ParseException {
+    public List<PersonDTO> showPersonInfoByPerson(String firstName, String lastName) throws ParseException {
 
         List<Person> listPerson2 = personDAO.findByLastName(lastName);
         List<Person> listPersonLocal = new ArrayList<Person>(listPerson2);
-
+        List<PersonDTO>  personDTOList = new ArrayList<PersonDTO>();
         ages = new Ages();
-        List<MedicalRecord> listMedicalRecordsLocal = new ArrayList<MedicalRecord>();
         for (Person person : listPersonLocal) {
+
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
-            listMedicalRecordsLocal.add(medicalRecord);
             ages.calculateDate(medicalRecord.getBirthdate());
+             personDTOList.add(new PersonDTO(person.getLastName(), person.getAddress(), person.getEmail(), ages.getAge(),medicalRecord.getAllergies(),medicalRecord.getMedications()));
         }
 
-        return new PersonInfoDTO(listPersonLocal, listMedicalRecordsLocal, ages.getListAge());
+        return personDTOList;
     }
 
 

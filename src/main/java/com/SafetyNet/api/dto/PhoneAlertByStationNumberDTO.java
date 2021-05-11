@@ -1,4 +1,4 @@
-package com.SafetyNet.api.DTO;
+package com.SafetyNet.api.dto;
 
 import java.util.List;
 

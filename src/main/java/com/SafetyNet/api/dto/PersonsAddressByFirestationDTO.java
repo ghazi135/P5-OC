@@ -1,22 +1,23 @@
-package com.SafetyNet.api.DTO;
+package com.SafetyNet.api.dto;
 
 import com.SafetyNet.api.model.MedicalRecord;
 import com.SafetyNet.api.model.Person;
 
 import java.util.List;
 
-public class PersonInfoDTO {
+public class PersonsAddressByFirestationDTO {
 
     private final List<Person>        listPersons;
     private final List<MedicalRecord> listMedicalRecords;
     private final List<Long>          age;
 
 
-    public PersonInfoDTO(List<Person> listPersons, List<MedicalRecord> listMedicalRecords, List<Long> age) {
 
-        this.listPersons        = listPersons;
-        this.listMedicalRecords = listMedicalRecords;
-        this.age                = age;
+    public PersonsAddressByFirestationDTO(List<Person> listPersons, List<MedicalRecord> listMedicalRecords, List<Long> age) {
+
+        this.listPersons = listPersons;
+        this.listMedicalRecords      = listMedicalRecords;
+        this.age    = age;
     }
 
     public List<Person> getListPersons() {
@@ -33,4 +34,5 @@ public class PersonInfoDTO {
 
         return age;
     }
+
 }

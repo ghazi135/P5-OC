@@ -1,18 +1,15 @@
-package com.SafetyNet.api.DTO;
+package com.SafetyNet.api.dto;
 
-import com.SafetyNet.api.model.Firestation;
-import com.SafetyNet.api.model.MedicalRecord;
 import com.SafetyNet.api.model.Person;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
 public class PersonByFirestationDTO {
-
+    @JsonIgnoreProperties({"zip", "email", "city"})
     private final List<Person> listPersons;
     private final long adults;
     private final long children;
-
-
 
 
     public PersonByFirestationDTO(List<Person> listPersons, long adults, long children) {

@@ -107,18 +107,31 @@ public class MedicalRecordControllerTest {
         verify(medicalRecordService, times(1)).save(any(MedicalRecord.class));
     }
 
+
     @Test
     public void updateMedicalRecord() throws Exception {
         // ARRANGE
         MedicalRecord medicalRecord = new MedicalRecord();
-
+        List<String> medication = new ArrayList<String>();
+        List<String> allergie = new ArrayList<String>();
+        allergie.add("a1");
+        allergie.add("a2");
+        medication.add("a2");
+        medication.add("q5");
+        medicalRecord.setFirstName("ghazi");
+        medicalRecord.setLastName("bouzazi");
+        medicalRecord.setAllergies(allergie);
+        medicalRecord.setMedications(medication);
+        medicalRecord.setBirthdate("12/27/1994");
         when(medicalRecordService.update(any(String.class), (any(MedicalRecord.class))))
                 .thenReturn(medicalRecord);
 
+        // ACT
         MvcResult mvcResult = mockMvc.perform(put("/medicalRecord/ghazibouzazi").contentType(MediaType.APPLICATION_JSON)
-                                                                           .content(" {\n" + "\"firstName\": \"ghazi\",\n" + "\"lastName\": \"bouzazi\",\n" + "\"birthdate\": \"03/06/1984\",\n" + "\"medications\": [\n" + "\"aznol:350mg\",\n" + "\"hydrapermazol:100mg\"\n" + "],\n" + "\"allergies\": [\n" + " \"nillacilan\"\n" + "]\n" + "}")).andDo(print()).andReturn();
+                                                                           .content("{\"firstName\":\"ghazi\"}")).andDo(print()).andReturn();
         int status = mvcResult.getResponse().getStatus();
 
+        // ASSERT
         assertEquals(status, 200);
         verify(medicalRecordService, times(1)).update(any(String.class), (any(MedicalRecord.class)));
     }

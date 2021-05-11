@@ -46,23 +46,21 @@ public class MedicalRecordDAOTest {
 
     @Test
     public void findByFirstName() {
-        // ARRANGE
-        MedicalRecord medicalRecord = new MedicalRecord(); // method return value
-        String firstName = "John"; // parameter
-        // ACT
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+        String firstName = "John";
+
         medicalRecord = medicalRecordImpl.findByFirstName(firstName);
-        // ASSERT
         assertThat(medicalRecord.getFirstName(), containsString("John"));
     }
 
     @Test
     public void findByLastName() {
-        // ARRANGE
-        List<MedicalRecord> medicalRecord = new ArrayList<MedicalRecord>(); // method return value
+
+        List<MedicalRecord> medicalRecord = new ArrayList<MedicalRecord>();
         String lastName = "Boyd"; // parameter
-        // ACT
         medicalRecord = medicalRecordImpl.findByLastName(lastName);
-        // ASSERT
+
         assertThat(medicalRecord.toString(), containsString("John"));
         assertThat(medicalRecord.toString(), containsString("Allison"));
     }
@@ -70,7 +68,7 @@ public class MedicalRecordDAOTest {
     @Test
     public void save() {
         // ARRANGE
-        MedicalRecord medicalRecord = new MedicalRecord(); // parameter
+        MedicalRecord medicalRecord = new MedicalRecord();
         List<String> allergies = new ArrayList<String>();
         allergies.add("BBBB");
         medicalRecord.setFirstName("AAAA");
@@ -86,15 +84,15 @@ public class MedicalRecordDAOTest {
     @Test
     public void update() throws ParseException {
         // ARRANGE
-        MedicalRecord medicalRecord = new MedicalRecord(); // parameter
-        String firstNameAndlastName = "JohnBoyd"; // parameter
+        MedicalRecord medicalRecord = new MedicalRecord();
+        String firstNameAndlastName = "JohnBoyd";
         List<String> allergies = new ArrayList<String>();
         allergies.add("BBBB");
         medicalRecord.setFirstName("AAAA");
         medicalRecord.setAllergies(allergies);
-        // ACT
+        medicalRecord.setBirthdate("03/25/1995");
         medicalRecordImpl.update(firstNameAndlastName, medicalRecord);
-        // ASSERT
+
         medicalRecords = medicalRecordImpl.findAll();
         assertThat(medicalRecords.toString(), containsString("BBBB"));
         assertThat(medicalRecords.toString(), not(containsString("AAAA")));

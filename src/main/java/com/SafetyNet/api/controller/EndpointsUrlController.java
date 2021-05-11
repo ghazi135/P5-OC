@@ -3,7 +3,7 @@ package com.SafetyNet.api.controller;
 
 import com.SafetyNet.api.model.Person;
 import com.SafetyNet.api.service.EndpointUrlService;
-import com.SafetyNet.api.DTO.*;
+import com.SafetyNet.api.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,13 +34,13 @@ public class EndpointsUrlController {
     @GetMapping(value = "/childAlert{address}")
     public ChildrenByAdressDTO showChildrenByAddress(@PathVariable String address) throws ParseException {
 
-        ChildrenByAdressDTO childrenByAdressObject = endpointUrlService.showChildrenByAddress(address);
+        ChildrenByAdressDTO childrenByAdressDTO = endpointUrlService.showChildrenByAddress(address);
         long                children               = ChildrenByAdressDTO.getChildren();
         if (children == 0) {
             return null;
         } else {
 
-            return childrenByAdressObject;
+            return childrenByAdressDTO;
         }
     }
 
@@ -75,7 +75,7 @@ public class EndpointsUrlController {
 
 
     @GetMapping(value = "/personInfo{firstName}{lastName}")
-    public PersonInfoDTO showPersonInfoByPerson(@RequestParam(value = "firstName") String firstName,
+    public List<PersonDTO> showPersonInfoByPerson(@RequestParam(value = "firstName") String firstName,
             @RequestParam(value = "lastName") String lastName) throws ParseException {
 
         return endpointUrlService.showPersonInfoByPerson(firstName, lastName);
