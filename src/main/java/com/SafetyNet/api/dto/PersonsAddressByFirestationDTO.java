@@ -7,6 +7,10 @@ import java.util.List;
 
 public class PersonsAddressByFirestationDTO {
 
+
+
+
+    private final int          station;
     private final String       lastName;
     private final String       phone;
     private final Long         age;
@@ -14,13 +18,19 @@ public class PersonsAddressByFirestationDTO {
     private final List<String> allergies;
 
 
-    public PersonsAddressByFirestationDTO(String lastName, String phone, Long age, List<String> medications, List<String> allergies) {
+    public PersonsAddressByFirestationDTO(int station, String lastName, String phone, Long age, List<String> medications, List<String> allergies) {
 
+        this.station = station;
         this.lastName    = lastName;
         this.phone       = phone;
         this.age         = age;
         this.medications = medications;
         this.allergies   = allergies;
+    }
+
+    public int getStation() {
+
+        return station;
     }
 
     public String getLastName() {

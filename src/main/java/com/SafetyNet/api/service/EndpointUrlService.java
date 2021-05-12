@@ -109,23 +109,28 @@ public class EndpointUrlService {
                 ages.getListAge());
     }
 
-    public List<PersonsAddressByFirestationDTO> showPersonsAddressByFirestation(int stations) throws ParseException {
+    public List<PersonsAddressByFirestationDTO> showPersonsAddressByFirestation(List<Integer> stations) throws ParseException {
 
         List<PersonsAddressByFirestationDTO> personsAddressByFirestationDTOList = new ArrayList<PersonsAddressByFirestationDTO>();
         Ages ages = new Ages();
         List<Person> listPersonLocal = new ArrayList<Person>();
-        for (Firestation firestation : firestationDAO.findAddressByStation(stations)) {
-            List<Person> listPerson2 = personDAO.findByAddress(firestation.getAddress());
-            listPersonLocal.addAll(listPerson2);
+        for (int station : stations){
+
+
+            for (Firestation firestation : firestationDAO.findAddressByStation(station)) {
+                List<Person> listPerson2 = personDAO.findByAddress(firestation.getAddress());
+                listPersonLocal.addAll(listPerson2);
+            }
+
+            List<MedicalRecord> listMedicalRecordsLocal = new ArrayList<MedicalRecord>();
+            for (Person person : listPersonLocal) {
+                MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
+                listMedicalRecordsLocal.add(medicalRecord);
+                ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
+                personsAddressByFirestationDTOList.add(new PersonsAddressByFirestationDTO(station,person.getLastName(),person.getPhone(),ages.getAge(),medicalRecord.getMedications(),medicalRecord.getAllergies()));
+            }
         }
 
-        List<MedicalRecord> listMedicalRecordsLocal = new ArrayList<MedicalRecord>();
-        for (Person person : listPersonLocal) {
-            MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
-            listMedicalRecordsLocal.add(medicalRecord);
-            ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
-            personsAddressByFirestationDTOList.add(new PersonsAddressByFirestationDTO(person.getLastName(),person.getPhone(),ages.getAge(),medicalRecord.getMedications(),medicalRecord.getAllergies()));
-        }
 
         return personsAddressByFirestationDTOList;
     }
