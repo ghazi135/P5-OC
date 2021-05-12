@@ -1,16 +1,11 @@
 package com.SafetyNet.api.dto;
 
-import com.SafetyNet.api.model.MedicalRecord;
-import com.SafetyNet.api.model.Person;
-
 import java.util.List;
 
 public class PersonsAddressByFirestationDTO {
 
 
 
-
-    private final int          station;
     private final String       lastName;
     private final String       phone;
     private final Long         age;
@@ -18,9 +13,11 @@ public class PersonsAddressByFirestationDTO {
     private final List<String> allergies;
 
 
-    public PersonsAddressByFirestationDTO(int station, String lastName, String phone, Long age, List<String> medications, List<String> allergies) {
 
-        this.station = station;
+
+    public PersonsAddressByFirestationDTO( String lastName, String phone, Long age, List<String> medications, List<String> allergies) {
+
+
         this.lastName    = lastName;
         this.phone       = phone;
         this.age         = age;
@@ -28,10 +25,6 @@ public class PersonsAddressByFirestationDTO {
         this.allergies   = allergies;
     }
 
-    public int getStation() {
-
-        return station;
-    }
 
     public String getLastName() {
 

@@ -109,12 +109,13 @@ public class EndpointUrlService {
                 ages.getListAge());
     }
 
-    public List<PersonsAddressByFirestationDTO> showPersonsAddressByFirestation(List<Integer> stations) throws ParseException {
+    public List<PersonsAddressByFirestationDTO> showPersonsAddressByFirestations(List<Integer> stations) throws ParseException {
 
         List<PersonsAddressByFirestationDTO> personsAddressByFirestationDTOList = new ArrayList<PersonsAddressByFirestationDTO>();
         Ages ages = new Ages();
         List<Person> listPersonLocal = new ArrayList<Person>();
-        for (int station : stations){
+
+        for (Integer station : stations){
 
 
             for (Firestation firestation : firestationDAO.findAddressByStation(station)) {
@@ -127,7 +128,7 @@ public class EndpointUrlService {
                 MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
                 listMedicalRecordsLocal.add(medicalRecord);
                 ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
-                personsAddressByFirestationDTOList.add(new PersonsAddressByFirestationDTO(station,person.getLastName(),person.getPhone(),ages.getAge(),medicalRecord.getMedications(),medicalRecord.getAllergies()));
+                personsAddressByFirestationDTOList.add(new PersonsAddressByFirestationDTO(person.getLastName(),person.getPhone(),ages.getAge(),medicalRecord.getMedications(),medicalRecord.getAllergies()));
             }
         }
 

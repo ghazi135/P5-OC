@@ -63,7 +63,7 @@ public class EndpointsUrlController {
     @GetMapping(value = "/flood/stations{stations}")
     public List<PersonsAddressByFirestationDTO>  showPersonsAddressByFirestation(@RequestParam(value = "stationList")  List<Integer> stations) throws ParseException {
 
-        return endpointUrlService.showPersonsAddressByFirestation(stations);
+        return endpointUrlService.showPersonsAddressByFirestations(stations);
     }
 
 
