@@ -1,11 +1,7 @@
-package com.SafetyNet.api.serviceTest;
+package com.SafetyNet.api.service;
 
-import com.SafetyNet.api.dao.FirestationDAO;
 import com.SafetyNet.api.dao.MedicalRecordDAO;
-import com.SafetyNet.api.model.Firestation;
 import com.SafetyNet.api.model.MedicalRecord;
-import com.SafetyNet.api.service.FirestationService;
-import com.SafetyNet.api.service.MedicalRecordService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

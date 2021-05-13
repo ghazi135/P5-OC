@@ -24,57 +24,52 @@ public class EndpointsUrlController {
     public EndpointsUrlController(EndpointUrlService endpointUrlService) {this.endpointUrlService = endpointUrlService;}
 
 
-    @GetMapping(value = "/firestation{stationNumber}")
-    public PersonByFirestationDTO getPersonsByFirestation(@PathVariable int stationNumber) throws ParseException {
+    @GetMapping(value = "/firestation{station_Number}")
+    public PersonByFirestationDTO getPersonsByFirestation(@RequestParam(value = "stationNumber") int station_Number) throws ParseException {
 
-        return endpointUrlService.getPersonsByFirestation(stationNumber);
+        return endpointUrlService.getPersonsByFirestation(station_Number);
     }
 
 
     @GetMapping(value = "/childAlert{address}")
-    public List<ChildrenByAdressDTO> showChildrenByAddress(@PathVariable String address) throws ParseException {
+    public List<ChildrenByAdressDTO> getChildrenByAddress( @RequestParam(value = "address") String address) throws ParseException {
 
-       return endpointUrlService.showChildrenByAddress(address);
+       return endpointUrlService.getChildrenByAddress(address);
     }
 
 
-    @GetMapping(value = "/communityEmail/{city}")
-    public EmailDTO getMailsByCity(@PathVariable String city) {
-
-        List<String> email = new ArrayList<>();
-        for (Person person : endpointUrlService.getMailsByCity(city)) {
-            email.add(person.getEmail());
-        }
-        return new EmailDTO(email);
-    }
 
     @GetMapping(value = "/phoneAlert{stationNumber}")
-    public PhoneAlertByStationNumberDTO getPhoneNumbersByFirestation(@PathVariable int stationNumber) {
+    public PhoneAlertByStationNumberDTO getPhoneNumbersByFirestation( @RequestParam(value = "firestation") int stationNumber) {
 
         return endpointUrlService.getPhoneNumbersByFirestation(stationNumber);
     }
 
     @GetMapping(value = "/fire{address}")
-    public ListPersonByAdressDTO getPersonsByAddress(@PathVariable String address) throws ParseException {
+    public ListPersonByAdressDTO getPersonsByAddress(@RequestParam(value = "address") String address) throws ParseException {
 
         return endpointUrlService.getPersonsByAddress(address);
     }
 
     @GetMapping(value = "/flood/stations{stations}")
-    public List<PersonsAddressByFirestationDTO>  showPersonsAddressByFirestation(@RequestParam(value = "stationList")  List<Integer> stations) throws ParseException {
+    public List<PersonsAddressByFirestationDTO>  getPersonsAddressByFirestation(@RequestParam(value = "stationList")  List<Integer> stations) throws ParseException {
 
-        return endpointUrlService.showPersonsAddressByFirestations(stations);
+        return endpointUrlService.getPersonsAddressByFirestations(stations);
     }
 
 
     @GetMapping(value = "/personInfo{firstName}{lastName}")
-    public List<PersonInfoDTO> showPersonInfoByPerson(@RequestParam(value = "firstName") String firstName,
+    public List<PersonInfoDTO> getPersonInfoByPerson(@RequestParam(value = "firstName") String firstName,
             @RequestParam(value = "lastName") String lastName) throws ParseException {
 
-        return endpointUrlService.showPersonInfoByPerson(firstName, lastName);
+        return endpointUrlService.getPersonInfoByPerson(firstName, lastName);
     }
 
+    @GetMapping(value = "/communityEmail{city}")
+    public EmailDTO getMailsByCity(@RequestParam( value = "city") String city) {
 
+        return endpointUrlService.getMailsByCity(city);
+    }
 
 
 }

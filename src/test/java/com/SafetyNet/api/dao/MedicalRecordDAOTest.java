@@ -1,4 +1,4 @@
-package com.SafetyNet.api.daoTest;
+package com.SafetyNet.api.dao;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.not;
@@ -8,7 +8,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.SafetyNet.api.dao.MedicalRecordDAOImpl;
 import com.SafetyNet.api.model.MedicalRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

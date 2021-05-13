@@ -1,10 +1,10 @@
-package com.SafetyNet.api.controllerTest;
+package com.SafetyNet.api.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import com.SafetyNet.api.controller.PersonController;
+
 import com.SafetyNet.api.model.Person;
 import com.SafetyNet.api.service.PersonService;
 import org.junit.Test;

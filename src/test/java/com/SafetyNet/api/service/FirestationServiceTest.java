@@ -1,16 +1,12 @@
-package com.SafetyNet.api.serviceTest;
+package com.SafetyNet.api.service;
 
 import com.SafetyNet.api.dao.FirestationDAO;
 import com.SafetyNet.api.model.Firestation;
-import com.SafetyNet.api.service.FirestationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;

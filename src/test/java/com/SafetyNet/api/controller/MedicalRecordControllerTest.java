@@ -1,4 +1,4 @@
-package com.SafetyNet.api.controllerTest;
+package com.SafetyNet.api.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -14,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.util.ArrayList;
 import java.util.List;
 
-import com.SafetyNet.api.controller.MedicalRecordController;
 import com.SafetyNet.api.model.MedicalRecord;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

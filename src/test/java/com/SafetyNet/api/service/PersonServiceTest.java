@@ -1,8 +1,7 @@
-package com.SafetyNet.api.serviceTest;
+package com.SafetyNet.api.service;
 
 import com.SafetyNet.api.dao.PersonDAO;
 import com.SafetyNet.api.model.Person;
-import com.SafetyNet.api.service.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

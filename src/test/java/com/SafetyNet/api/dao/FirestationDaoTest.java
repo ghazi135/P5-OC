@@ -1,4 +1,4 @@
-package com.SafetyNet.api.daoTest;
+package com.SafetyNet.api.dao;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.not;
@@ -7,7 +7,6 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.SafetyNet.api.dao.FirestationDAOImpl;
 import com.SafetyNet.api.model.Firestation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

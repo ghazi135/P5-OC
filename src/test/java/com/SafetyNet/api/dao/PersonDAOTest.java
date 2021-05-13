@@ -1,7 +1,6 @@
-package com.SafetyNet.api.daoTest;
+package com.SafetyNet.api.dao;
 
 import com.SafetyNet.api.model.Person;
-import com.SafetyNet.api.dao.PersonDAOImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +42,32 @@ public class PersonDAOTest {
 
     }
 
+    @Test
+    public void findByLastName() {
+        // ARRANGE
+        String lastName = "Boyd"; // parameter
+
+        assertThat(personDaoImpl.findByLastName(lastName).toString(), containsString("Boyd"));
+
+    }
+
+    @Test
+    public void findByAdress() {
+        // ARRANGE
+        String address = "1509 Culver St"; // parameter
+
+        assertThat(personDaoImpl.findByAddress(address).toString(), containsString("1509 Culver St"));
+
+    }
+
+    @Test
+    public void findByCity() {
+        // ARRANGE
+        String city = "Culver"; // parameter
+
+        assertThat(personDaoImpl.findEmailByCity(city).toString(), containsString("Culver"));
+
+    }
     @Test
     public void save() {
         // ARRANGE

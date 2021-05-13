@@ -17,18 +17,27 @@ import java.util.List;
 
 @Service
 public class EndpointUrlService {
+    @Autowired
+    private final PersonDAO        personDAO;
+    @Autowired
+    private final FirestationDAO   firestationDAO;
+    @Autowired
+    private final MedicalRecordDAO medicalRecordDAO;
 
-    @Autowired
-    private PersonDAO        personDAO;
-    @Autowired
-    private FirestationDAO   firestationDAO;
-    @Autowired
-    private MedicalRecordDAO medicalRecordDAO;
-    private PersonInfoDTO    personDTO;
     private Ages             ages = new Ages();
-    public List<Person> getMailsByCity(String city) {
+    @Autowired
+    public EndpointUrlService(PersonDAO personDAO, FirestationDAO firestationDAO, MedicalRecordDAO medicalRecordDAO) {this.personDAO        = personDAO;
+                                                                                                                      this.firestationDAO   = firestationDAO;
+                                                                                                                      this.medicalRecordDAO = medicalRecordDAO;
+                                                                                                                     }
 
-        return  personDAO.findEmailByCity(city);
+
+    public EmailDTO getMailsByCity(String city) {
+        List<String> email = new ArrayList<>();
+        for (Person person : personDAO.findEmailByCity(city)) {
+            email.add(person.getEmail());
+        }
+        return new EmailDTO(email);
     }
 
 
@@ -50,7 +59,7 @@ public class EndpointUrlService {
                 ages.getChildren());
     }
 
-    public List<ChildrenByAdressDTO> showChildrenByAddress(String address) throws ParseException {
+    public List<ChildrenByAdressDTO> getChildrenByAddress(String address) throws ParseException {
 
         List<ChildrenByAdressDTO> childrenByAdressDTOList = new ArrayList<ChildrenByAdressDTO>();
         List<Person> listPerson2 = personDAO.findByAddress(address);
@@ -109,7 +118,7 @@ public class EndpointUrlService {
                 ages.getListAge());
     }
 
-    public List<PersonsAddressByFirestationDTO> showPersonsAddressByFirestations(List<Integer> stations) throws ParseException {
+    public List<PersonsAddressByFirestationDTO> getPersonsAddressByFirestations(List<Integer> stations) throws ParseException {
 
         List<PersonsAddressByFirestationDTO> personsAddressByFirestationDTOList = new ArrayList<PersonsAddressByFirestationDTO>();
         Ages ages = new Ages();
@@ -136,7 +145,7 @@ public class EndpointUrlService {
         return personsAddressByFirestationDTOList;
     }
 
-    public List<PersonInfoDTO> showPersonInfoByPerson(String firstName, String lastName) throws ParseException {
+    public List<PersonInfoDTO> getPersonInfoByPerson(String firstName, String lastName) throws ParseException {
 
         List<Person>        listPerson2     = personDAO.findByLastName(lastName);
         List<Person>        listPersonLocal = new ArrayList<Person>(listPerson2);
