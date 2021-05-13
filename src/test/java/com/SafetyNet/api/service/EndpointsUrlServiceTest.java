@@ -111,40 +111,71 @@ public class EndpointsUrlServiceTest {
 
     }
 
-//    @Test
-//    public void getChildrenByAddress() throws ParseException {
-//        listPerson = new ArrayList<Person>();
-//        Person person = new Person();
-//        person.setAddress("15 rue colonel dumont");
-//        person.setFirstName("ghazi");
-//        person.setLastName("bouzazi");
-//        person.setEmail("gbouzazi@gmail.com");
-//        person.setCity("grenoble");
-//        person.setZip(38000);
-//        person.setPhone("0782427444");
-//        listPerson.add(person);
-//
-//        MedicalRecord   medicalRecord = new MedicalRecord();
-//        List<String> medication    = new ArrayList<String>();
-//        List<String> allergie = new ArrayList<String>();
-//        allergie.add("AAAA");
-//        allergie.add("BBBB");
-//        medication.add("AAAA");
-//        medication.add("BBBB");
-//        medicalRecord.setFirstName("ghazi");
-//        medicalRecord.setLastName("bouzazi");
-//        medicalRecord.setAllergies(allergie);
-//        medicalRecord.setMedications(medication);
-//        medicalRecord.setBirthdate("12/27/1994");
-//        when(personDAO.findByAddress("15 rue colonel dumont")).thenReturn(listPerson);
-//        when(medicalRecordDAO.findByFirstName("ghazi")).thenReturn(medicalRecord);
-//        when(ages.getAge()).thenReturn(Long.valueOf(6));
-//        for (ChildrenByAdressDTO childrenByAdressDTO : endpointUrlService.getChildrenByAddress("15 rue colonel dumont"))
-//            Assertions.assertNull(childrenByAdressDTO);
-//
-//
-//    }
+    @Test
+    public void getChildrenByAddress() throws ParseException {
+        listPerson = new ArrayList<Person>();
+        Person person = new Person();
+        person.setAddress("15 rue colonel dumont");
+        person.setFirstName("ghazi");
+        person.setLastName("bouzazi");
+        person.setEmail("gbouzazi@gmail.com");
+        person.setCity("grenoble");
+        person.setZip(38000);
+        person.setPhone("0782427444");
+        listPerson.add(person);
 
+        MedicalRecord   medicalRecord = new MedicalRecord();
+        List<String> medication    = new ArrayList<String>();
+        List<String> allergie = new ArrayList<String>();
+        allergie.add("AAAA");
+        allergie.add("BBBB");
+        medication.add("AAAA");
+        medication.add("BBBB");
+        medicalRecord.setFirstName("ghazi");
+        medicalRecord.setLastName("bouzazi");
+        medicalRecord.setAllergies(allergie);
+        medicalRecord.setMedications(medication);
+        medicalRecord.setBirthdate("12/27/2011");
+        when(personDAO.findByAddress(any(String.class))).thenReturn(listPerson);
+        when(medicalRecordDAO.findByFirstName(any(String.class))).thenReturn(medicalRecord);
+        for (ChildrenByAdressDTO childrenByAdressDTO : endpointUrlService.getChildrenByAddress("15 rue colonel dumont")){
+            assertThat(childrenByAdressDTO.getFirstName(), containsString("ghazi"));
+            assertThat(childrenByAdressDTO.getLastName(), containsString("bouzazi"));
+        }
+
+    }
+
+    @Test
+    public void getChildrenByAddressWithNoChildren() throws ParseException {
+        listPerson = new ArrayList<Person>();
+        Person person = new Person();
+        person.setAddress("15 rue colonel dumont");
+        person.setFirstName("ghazi");
+        person.setLastName("bouzazi");
+        person.setEmail("gbouzazi@gmail.com");
+        person.setCity("grenoble");
+        person.setZip(38000);
+        person.setPhone("0782427444");
+        listPerson.add(person);
+
+        MedicalRecord   medicalRecord = new MedicalRecord();
+        List<String> medication    = new ArrayList<String>();
+        List<String> allergie = new ArrayList<String>();
+        allergie.add("AAAA");
+        allergie.add("BBBB");
+        medication.add("AAAA");
+        medication.add("BBBB");
+        medicalRecord.setFirstName("ghazi");
+        medicalRecord.setLastName("bouzazi");
+        medicalRecord.setAllergies(allergie);
+        medicalRecord.setMedications(medication);
+        medicalRecord.setBirthdate("12/27/1994");
+        when(personDAO.findByAddress(any(String.class))).thenReturn(listPerson);
+        when(medicalRecordDAO.findByFirstName(any(String.class))).thenReturn(medicalRecord);
+           assertNull(endpointUrlService.getChildrenByAddress("15 rue colonel dumont"));
+
+
+    }
     @Test
     public void getPhoneNumbersByFirestation(){
         listPerson = new ArrayList<Person>();
@@ -288,7 +319,13 @@ public class EndpointsUrlServiceTest {
         when(firestationDAO.findAddressByStation(any(int.class))).thenReturn(firestationList);
         when(medicalRecordDAO.findByFirstName(person.getFirstName())).thenReturn(medicalRecord);
         when(personDAO.findByAddress("15 rue colonel dumont")).thenReturn(listPerson);
-            assertNotNull(endpointUrlService.getPersonsByFirestation(2).getListPersons());
-        }
+            assertNotNull(endpointUrlService.getPersonsByFirestation(2));
+
+            for (Person personn : endpointUrlService.getPersonsByFirestation(2).getListPersons() ){
+                assertThat(personn.getFirstName(), containsString("ghazi"));
+
+            }
+    }
+
     }
 
