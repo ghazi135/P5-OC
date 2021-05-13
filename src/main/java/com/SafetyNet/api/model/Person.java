@@ -2,7 +2,9 @@ package com.SafetyNet.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Person {
+import java.util.List;
+
+public class Person  {
 
 
     private String firstName;
