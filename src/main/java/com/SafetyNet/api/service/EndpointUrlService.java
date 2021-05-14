@@ -3,10 +3,10 @@ package com.SafetyNet.api.service;
 import com.SafetyNet.api.dao.FirestationDAO;
 import com.SafetyNet.api.dao.MedicalRecordDAO;
 import com.SafetyNet.api.dao.PersonDAO;
+import com.SafetyNet.api.dto.*;
 import com.SafetyNet.api.model.Firestation;
 import com.SafetyNet.api.model.MedicalRecord;
 import com.SafetyNet.api.model.Person;
-import com.SafetyNet.api.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,7 @@ import java.util.List;
 
 @Service
 public class EndpointUrlService {
+
     @Autowired
     private final PersonDAO        personDAO;
     @Autowired
@@ -24,15 +25,19 @@ public class EndpointUrlService {
     @Autowired
     private final MedicalRecordDAO medicalRecordDAO;
 
-    private Ages             ages = new Ages();
+    private Ages ages = new Ages();
+
     @Autowired
-    public EndpointUrlService(PersonDAO personDAO, FirestationDAO firestationDAO, MedicalRecordDAO medicalRecordDAO) {this.personDAO        = personDAO;
-                                                                                                                      this.firestationDAO   = firestationDAO;
-                                                                                                                      this.medicalRecordDAO = medicalRecordDAO;
-                                                                                                                     }
+    public EndpointUrlService(PersonDAO personDAO, FirestationDAO firestationDAO, MedicalRecordDAO medicalRecordDAO) {
+
+        this.personDAO        = personDAO;
+        this.firestationDAO   = firestationDAO;
+        this.medicalRecordDAO = medicalRecordDAO;
+    }
 
 
     public EmailDTO getMailsByCity(String city) {
+
         List<String> email = new ArrayList<>();
         for (Person person : personDAO.findEmailByCity(city)) {
             email.add(person.getEmail());
@@ -43,7 +48,7 @@ public class EndpointUrlService {
 
     public PersonByFirestationDTO getPersonsByFirestation(int stationNumber) throws ParseException {
 
-         ages = new Ages();
+        ages = new Ages();
         List<Person> listPersonLocal = new ArrayList<Person>();
         for (Firestation firestation : firestationDAO.findAddressByStation(stationNumber)) {
             List<Person> listPersonTmp = personDAO.findByAddress(firestation.getAddress());
@@ -54,28 +59,24 @@ public class EndpointUrlService {
                 ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
             }
         }
-        return new PersonByFirestationDTO(listPersonLocal,
-                ages.getAdults(),
-                ages.getChildren());
+        return new PersonByFirestationDTO(listPersonLocal, ages.getAdults(), ages.getChildren());
     }
 
     public List<ChildrenByAdressDTO> getChildrenByAddress(String address) throws ParseException {
 
         List<ChildrenByAdressDTO> childrenByAdressDTOList = new ArrayList<ChildrenByAdressDTO>();
-        List<Person> listPerson2 = personDAO.findByAddress(address);
+        List<Person>              listPerson2             = personDAO.findByAddress(address);
         ages = new Ages();
         List<MedicalRecord> listMedicalRecords = new ArrayList<MedicalRecord>();
         for (Person person : listPerson2) {
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
             listMedicalRecords.add(medicalRecord);
             ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
-            childrenByAdressDTOList.add(new ChildrenByAdressDTO(person.getFirstName(),person.getLastName(),ages.getAge()));
+            childrenByAdressDTOList.add(new ChildrenByAdressDTO(person.getFirstName(), person.getLastName(), ages.getAge()));
         }
-        if(ages.getChildren() == 0){
+        if (ages.getChildren() == 0) {
             return null;
-        }
-        else
-        {
+        } else {
             return childrenByAdressDTOList;
         }
 
@@ -85,46 +86,47 @@ public class EndpointUrlService {
     public PhoneAlertByStationNumberDTO getPhoneNumbersByFirestation(int firestation) {
 
         List<Person> listPersonLocal = new ArrayList<Person>();
-        List<String> listPhones = new ArrayList<String>();
+        List<String> listPhones      = new ArrayList<String>();
         for (Firestation firestation1 : firestationDAO.findAddressByStation(firestation)) {
             listPersonLocal.addAll(personDAO.findByAddress(firestation1.getAddress()));
         }
         for (Person person : listPersonLocal) {
-        listPhones.add(person.getPhone());
+            listPhones.add(person.getPhone());
         }
 
 
-
-        return  new PhoneAlertByStationNumberDTO(listPhones);
+        return new PhoneAlertByStationNumberDTO(listPhones);
     }
 
 
-    public ListPersonByAdressDTO getPersonsByAddress(String address) throws ParseException {
-        Firestation firestationLocal = firestationDAO.findById(address);
+    public List<PersonByAdressDTO> getPersonsByAddress(String address) throws ParseException {
 
-        List<Person> listPersonLocal = new ArrayList<Person>();
-        List<Person> listPerson2 = personDAO.findByAddress(firestationLocal.getAddress());
+        Firestation             firestationLocal      = firestationDAO.findById(address);
+        List<PersonByAdressDTO> PersonByAdressDTOList = new ArrayList<PersonByAdressDTO>();
+        List<Person>            listPersonLocal       = new ArrayList<Person>();
+        List<Person>            listPerson2           = personDAO.findByAddress(firestationLocal.getAddress());
         listPersonLocal.addAll(listPerson2);
 
-         ages = new Ages();
+        ages = new Ages();
         List<MedicalRecord> listMedicalRecordsLocal = new ArrayList<MedicalRecord>();
         for (Person person : listPerson2) {
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
             listMedicalRecordsLocal.add(medicalRecord);
             ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
+            PersonByAdressDTOList.add(new PersonByAdressDTO(person.getFirstName(), person.getLastName(), ages.getAge(), person
+                    .getPhone(), firestationLocal.getStation(), medicalRecord));
         }
 
-        return new ListPersonByAdressDTO(listPersonLocal, listMedicalRecordsLocal, firestationLocal,
-                ages.getListAge());
+        return PersonByAdressDTOList;
     }
 
     public List<PersonsAddressByFirestationDTO> getPersonsAddressByFirestations(List<Integer> stations) throws ParseException {
 
         List<PersonsAddressByFirestationDTO> personsAddressByFirestationDTOList = new ArrayList<PersonsAddressByFirestationDTO>();
-        Ages ages = new Ages();
-        List<Person> listPersonLocal = new ArrayList<Person>();
+        Ages                                 ages                               = new Ages();
+        List<Person>                         listPersonLocal                    = new ArrayList<Person>();
 
-        for (Integer station : stations){
+        for (Integer station : stations) {
 
 
             for (Firestation firestation : firestationDAO.findAddressByStation(station)) {
@@ -137,7 +139,8 @@ public class EndpointUrlService {
                 MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
                 listMedicalRecordsLocal.add(medicalRecord);
                 ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
-                personsAddressByFirestationDTOList.add(new PersonsAddressByFirestationDTO(person.getLastName(),person.getPhone(),ages.getAge(),medicalRecord.getMedications(),medicalRecord.getAllergies()));
+                personsAddressByFirestationDTOList.add(new PersonsAddressByFirestationDTO(person.getLastName(), person.getPhone(), ages
+                        .getAge(), medicalRecord.getMedications(), medicalRecord.getAllergies()));
             }
         }
 
@@ -155,7 +158,8 @@ public class EndpointUrlService {
 
             MedicalRecord medicalRecord = medicalRecordDAO.findByFirstName(person.getFirstName());
             ages.calculateDate(new SimpleDateFormat("MM/dd/yyyy").parse(medicalRecord.getBirthdate()));
-             personDTOList.add(new PersonInfoDTO(person.getLastName(), person.getAddress(), person.getEmail(), ages.getAge(),medicalRecord.getAllergies(),medicalRecord.getMedications()));
+            personDTOList.add(new PersonInfoDTO(person.getLastName(), person.getAddress(), person.getEmail(), ages.getAge(), medicalRecord
+                    .getAllergies(), medicalRecord.getMedications()));
         }
 
         return personDTOList;

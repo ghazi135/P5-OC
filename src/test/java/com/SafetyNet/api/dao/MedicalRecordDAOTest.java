@@ -1,16 +1,16 @@
 package com.SafetyNet.api.dao;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
+import com.SafetyNet.api.model.MedicalRecord;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.SafetyNet.api.model.MedicalRecord;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
 
 public class MedicalRecordDAOTest {
 
@@ -19,6 +19,7 @@ public class MedicalRecordDAOTest {
 
     @BeforeEach
     public void setUp() throws Exception {
+
         medicalRecordImpl = new MedicalRecordDAOImpl(medicalRecords);
     }
 
@@ -35,8 +36,8 @@ public class MedicalRecordDAOTest {
     @Test
     public void findId() {
 
-        MedicalRecord medicalRecord = new MedicalRecord();
-        String firstNameAndlastName = "JohnBoyd"; // parameter
+        MedicalRecord medicalRecord        = new MedicalRecord();
+        String        firstNameAndlastName = "JohnBoyd"; // parameter
 
         medicalRecord = medicalRecordImpl.findById(firstNameAndlastName);
 
@@ -47,7 +48,7 @@ public class MedicalRecordDAOTest {
     public void findByFirstName() {
 
         MedicalRecord medicalRecord = new MedicalRecord();
-        String firstName = "John";
+        String        firstName     = "John";
 
         medicalRecord = medicalRecordImpl.findByFirstName(firstName);
         assertThat(medicalRecord.getFirstName(), containsString("John"));
@@ -57,7 +58,7 @@ public class MedicalRecordDAOTest {
     public void findByLastName() {
 
         List<MedicalRecord> medicalRecord = new ArrayList<MedicalRecord>();
-        String lastName = "Boyd"; // parameter
+        String              lastName      = "Boyd"; // parameter
         medicalRecord = medicalRecordImpl.findByLastName(lastName);
 
         assertThat(medicalRecord.toString(), containsString("John"));
@@ -68,7 +69,7 @@ public class MedicalRecordDAOTest {
     public void save() {
         // ARRANGE
         MedicalRecord medicalRecord = new MedicalRecord();
-        List<String> allergies = new ArrayList<String>();
+        List<String>  allergies     = new ArrayList<String>();
         allergies.add("BBBB");
         medicalRecord.setFirstName("AAAA");
         medicalRecord.setAllergies(allergies);
@@ -83,9 +84,9 @@ public class MedicalRecordDAOTest {
     @Test
     public void update() throws ParseException {
         // ARRANGE
-        MedicalRecord medicalRecord = new MedicalRecord();
-        String firstNameAndlastName = "JohnBoyd";
-        List<String> allergies = new ArrayList<String>();
+        MedicalRecord medicalRecord        = new MedicalRecord();
+        String        firstNameAndlastName = "JohnBoyd";
+        List<String>  allergies            = new ArrayList<String>();
         allergies.add("BBBB");
         medicalRecord.setFirstName("AAAA");
         medicalRecord.setAllergies(allergies);

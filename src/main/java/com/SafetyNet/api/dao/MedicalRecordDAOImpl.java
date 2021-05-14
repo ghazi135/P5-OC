@@ -16,18 +16,21 @@ public class MedicalRecordDAOImpl implements MedicalRecordDAO {
 
     @Autowired
     public MedicalRecordDAOImpl(List<MedicalRecord> medicalRecord) throws Exception {
+
         super();
-        medicalRecord = new DataReaderService().getData().getMedicalRecords();
+        medicalRecord       = new DataReaderService().getData().getMedicalRecords();
         this.medicalRecords = medicalRecord;
     }
 
     @Override
     public List<MedicalRecord> findAll() {
+
         return medicalRecords;
     }
 
     @Override
     public MedicalRecord findById(String firstNameAndlastName) {
+
         for (MedicalRecord medicalRecord : medicalRecords) {
             if (medicalRecord.getFirstNameAndlastName().equals(firstNameAndlastName)) {
                 return medicalRecord;
@@ -38,6 +41,7 @@ public class MedicalRecordDAOImpl implements MedicalRecordDAO {
 
     @Override
     public MedicalRecord findByFirstName(String firstName) {
+
         for (MedicalRecord medicalRecord : medicalRecords) {
             if (medicalRecord.getFirstName().equals(firstName)) {
                 return medicalRecord;
@@ -48,6 +52,7 @@ public class MedicalRecordDAOImpl implements MedicalRecordDAO {
 
     @Override
     public List<MedicalRecord> findByLastName(String lastName) {
+
         List<MedicalRecord> listMedicalRecords = new ArrayList<MedicalRecord>();
         for (MedicalRecord medicalRecord : medicalRecords) {
             if (medicalRecord.getLastName().equals(lastName)) {
@@ -59,6 +64,7 @@ public class MedicalRecordDAOImpl implements MedicalRecordDAO {
 
     @Override
     public List<MedicalRecord> save(MedicalRecord medicalRecord) {
+
         List<MedicalRecord> saveMedicalRecord = medicalRecords;
         saveMedicalRecord.add(medicalRecord);
         return saveMedicalRecord;
@@ -66,6 +72,7 @@ public class MedicalRecordDAOImpl implements MedicalRecordDAO {
 
     @Override
     public MedicalRecord update(String firstNameAndlastName, MedicalRecord medicalRecord) throws ParseException {
+
         for (MedicalRecord updateMedicalRecord : medicalRecords) {
             if (updateMedicalRecord.getFirstNameAndlastName().equals(firstNameAndlastName)) {
                 updateMedicalRecord.setBirthdate(medicalRecord.getBirthdate());

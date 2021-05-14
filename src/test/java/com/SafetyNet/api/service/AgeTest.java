@@ -5,7 +5,6 @@ import com.SafetyNet.api.dao.MedicalRecordDAO;
 import com.SafetyNet.api.dao.MedicalRecordDAOImpl;
 import com.SafetyNet.api.model.MedicalRecord;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,7 +90,7 @@ class AgeTest {
     void givenBirthDatesFromJSON_whenCalculateDate_thenItCountTheNumberOfAdultsAndChildren() throws Exception {
         // ARRANGE
 
-        List<MedicalRecord> listMedicalRecords =  new ArrayList<MedicalRecord>();
+        List<MedicalRecord> listMedicalRecords = new ArrayList<MedicalRecord>();
         medicalRecordDAO = new MedicalRecordDAOImpl(listMedicalRecords);
         // ACT
         for (MedicalRecord medicalRecord : medicalRecordDAO.findAll()) {
@@ -109,7 +108,7 @@ class AgeTest {
     @Test
     void givenBirthDatesFromJSON_whenCalculateDate_thenItGiveTheAgeOfAdultsAndChildren() throws Exception {
 
-        List<MedicalRecord> listMedicalRecords =  new ArrayList<MedicalRecord>();
+        List<MedicalRecord> listMedicalRecords = new ArrayList<MedicalRecord>();
         medicalRecordDAO = new MedicalRecordDAOImpl(listMedicalRecords);
 
         for (MedicalRecord medicalRecord : medicalRecordDAO.findAll()) {

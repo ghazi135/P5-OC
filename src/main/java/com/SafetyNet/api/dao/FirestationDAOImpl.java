@@ -15,18 +15,21 @@ public class FirestationDAOImpl implements FirestationDAO {
 
     @Autowired
     public FirestationDAOImpl(List<Firestation> firestion) throws Exception {
+
         super();
-        firestion = new DataReaderService().getData().getFirestations();
+        firestion         = new DataReaderService().getData().getFirestations();
         this.firestations = firestion;
     }
 
     @Override
     public List<Firestation> findAll() {
+
         return firestations;
     }
 
     @Override
     public Firestation findById(String firestationAddress) {
+
         for (Firestation address : firestations) {
             if ((address.getAddress()).equals(firestationAddress)) {
                 return address;
@@ -37,6 +40,7 @@ public class FirestationDAOImpl implements FirestationDAO {
 
     @Override
     public List<Firestation> findAddressByStation(int station) {
+
         List<Firestation> listFirestation = new ArrayList<Firestation>();
         for (Firestation firestation : firestations) {
             if (firestation.getStation() == station) {
@@ -48,6 +52,7 @@ public class FirestationDAOImpl implements FirestationDAO {
 
     @Override
     public List<Firestation> save(Firestation firestation) {
+
         List<Firestation> saveFirestation = firestations;
         saveFirestation.add(firestation);
         return saveFirestation;
@@ -55,6 +60,7 @@ public class FirestationDAOImpl implements FirestationDAO {
 
     @Override
     public Firestation update(String firestationAddress, Firestation firestation) {
+
         for (Firestation updateFirestation : firestations) {
             if ((updateFirestation.getAddress()).equals(firestationAddress)) {
                 updateFirestation.setStation(firestation.getStation());
@@ -66,6 +72,7 @@ public class FirestationDAOImpl implements FirestationDAO {
 
     @Override
     public void deleteById(String firestationAddress) {
+
         List<Firestation> deleteFirestation = firestations;
         deleteFirestation.removeIf(firestation -> firestation.getAddress().equals(firestationAddress));
     }

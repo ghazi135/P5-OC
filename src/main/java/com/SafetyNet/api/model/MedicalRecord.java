@@ -3,8 +3,6 @@ package com.SafetyNet.api.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class MedicalRecord {
@@ -52,8 +50,8 @@ public class MedicalRecord {
     }
 
     public String getBirthdate() throws ParseException {
-//
-//        Date date1 =new SimpleDateFormat("MM/dd/yyyy").parse();
+        //
+        //        Date date1 =new SimpleDateFormat("MM/dd/yyyy").parse();
         return birthdate;
     }
 

@@ -8,7 +8,6 @@ public class EmailDTO {
     private final List<String> email;
 
 
-
     public EmailDTO(List<String> email) {
 
         this.email = email;

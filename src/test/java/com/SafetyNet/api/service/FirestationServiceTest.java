@@ -26,12 +26,14 @@ public class FirestationServiceTest {
     FirestationDAO firestationDAO;
 
     @BeforeEach
-    void setup(){
+    void setup() {
+
         firestationService = new FirestationService(firestationDAO);
     }
 
     @Test
-    public void findAll(){
+    public void findAll() {
+
         firestationList = new ArrayList<Firestation>();
         Firestation firestation = new Firestation();
         firestation.setStation(10);
@@ -43,18 +45,21 @@ public class FirestationServiceTest {
     }
 
     @Test
-    public void findById(){
+    public void findById() {
+
         Firestation firestation = new Firestation();
         firestation.setStation(10);
         firestation.setAddress("15 rue colonel dumont ");
         when(firestationDAO.findById("15 rue colonel dumont ")).thenReturn(firestation);
-        assertThat(firestationService.findById("15 rue colonel dumont ").toString(), containsString("15 rue colonel dumont "));
+        assertThat(firestationService.findById("15 rue colonel dumont ")
+                                     .toString(), containsString("15 rue colonel dumont "));
 
 
     }
 
     @Test
-    public void addFirestation(){
+    public void addFirestation() {
+
         firestationList = new ArrayList<Firestation>();
         Firestation firestation = new Firestation();
         firestation.setStation(10);
@@ -65,19 +70,22 @@ public class FirestationServiceTest {
     }
 
     @Test
-    public void updateFirestation(){
+    public void updateFirestation() {
+
         firestationList = new ArrayList<Firestation>();
         Firestation firestation = new Firestation();
         firestation.setStation(10);
         firestation.setAddress("15 rue colonel dumont ");
         firestationList.add(firestation);
-        when(firestationDAO.update("15 rue colonel dumont ",firestation)).thenReturn(firestation);
-        assertThat(firestationService.update("15 rue colonel dumont ",firestation).toString(), containsString("15 rue colonel dumont "));
+        when(firestationDAO.update("15 rue colonel dumont ", firestation)).thenReturn(firestation);
+        assertThat(firestationService.update("15 rue colonel dumont ", firestation)
+                                     .toString(), containsString("15 rue colonel dumont "));
 
     }
 
     @Test
-    public void deleteFirestation(){
+    public void deleteFirestation() {
+
         Firestation firestation = new Firestation();
         firestation.setStation(10);
         firestation.setAddress("15 rue colonel dumont ");

@@ -5,20 +5,20 @@ import java.util.List;
 
 public class PersonInfoDTO {
 
-    private  String       lastName;
-    private  String       address;
+    private String       lastName;
+    private String       address;
     private Long         age;
     private String       email;
     private List<String> medications;
     private List<String> allergies;
 
 
-    public PersonInfoDTO( String lastName, String address, String email, Long age,List<String> medications, List<String> allergies) {
+    public PersonInfoDTO(String lastName, String address, String email, Long age, List<String> medications, List<String> allergies) {
 
-        this.lastName             = lastName;
-        this.address              = address;
-        this.email                = email;
-        this.age   = age;
+        this.lastName    = lastName;
+        this.address     = address;
+        this.email       = email;
+        this.age         = age;
         this.medications = medications;
         this.allergies   = allergies;
     }
@@ -45,6 +45,7 @@ public class PersonInfoDTO {
 
         return email;
     }
+
     public List<String> getMedications() {
 
         return medications;

@@ -5,7 +5,6 @@ import java.util.List;
 public class PersonsAddressByFirestationDTO {
 
 
-
     private final String       lastName;
     private final String       phone;
     private final Long         age;
@@ -13,9 +12,7 @@ public class PersonsAddressByFirestationDTO {
     private final List<String> allergies;
 
 
-
-
-    public PersonsAddressByFirestationDTO( String lastName, String phone, Long age, List<String> medications, List<String> allergies) {
+    public PersonsAddressByFirestationDTO(String lastName, String phone, Long age, List<String> medications, List<String> allergies) {
 
 
         this.lastName    = lastName;
@@ -50,9 +47,6 @@ public class PersonsAddressByFirestationDTO {
 
         return allergies;
     }
-
-
-
 
 
 }

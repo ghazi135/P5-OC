@@ -1,17 +1,15 @@
 package com.SafetyNet.api.dao;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.SafetyNet.api.model.Firestation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
 
 
 public class FirestationDaoTest {
@@ -21,6 +19,7 @@ public class FirestationDaoTest {
 
     @BeforeEach
     public void setUp() throws Exception {
+
         firestationDaoImpl = new FirestationDAOImpl(listFirestations);
     }
 
@@ -37,8 +36,8 @@ public class FirestationDaoTest {
     @Test
     public void findbyId() {
         // ARRANGE
-        Firestation firestation = new Firestation(); // method return value
-        String firestationAddress = "1509 Culver St"; // parameter
+        Firestation firestation        = new Firestation(); // method return value
+        String      firestationAddress = "1509 Culver St"; // parameter
         // ACT
         firestation = firestationDaoImpl.findById(firestationAddress);
         // ASSERT
@@ -50,7 +49,7 @@ public class FirestationDaoTest {
     public void findAddressByStation() {
         // ARRANGE
         List<Firestation> listFirestation; // method return value
-        int station = 3; // parameter
+        int               station = 3; // parameter
         // ACT
         listFirestation = firestationDaoImpl.findAddressByStation(station);
         // ASSERT
@@ -73,8 +72,8 @@ public class FirestationDaoTest {
     @Test
     public void update() {
         // ARRANGE
-        String firestationAddress = "1509 Culver St";
-        Firestation firestation = new Firestation();
+        String      firestationAddress = "1509 Culver St";
+        Firestation firestation        = new Firestation();
         firestation.setAddress("AAAA");
         firestation.setStation(0);
         // ACT
@@ -88,8 +87,8 @@ public class FirestationDaoTest {
     @Test
     public void deleteById() {
         // ARRANGE
-        String firestationAddress = "1509 Culver St"; // parameter
-        List<Firestation> listFirestation = new ArrayList<Firestation>();
+        String            firestationAddress = "1509 Culver St"; // parameter
+        List<Firestation> listFirestation    = new ArrayList<Firestation>();
         // ACT
         firestationDaoImpl.deleteById(firestationAddress);
         // ASSERT

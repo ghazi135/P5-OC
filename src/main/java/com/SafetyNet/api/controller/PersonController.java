@@ -15,7 +15,7 @@ public class PersonController {
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(PersonController.class);
 
     @Autowired
-    private              PersonService                   personService;
+    private PersonService personService;
 
     @GetMapping(value = "/person")
     public List<Person> showAllPersons() {

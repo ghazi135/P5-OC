@@ -1,6 +1,7 @@
 package com.SafetyNet.api.dao;
-import com.SafetyNet.api.model.Person;
+
 import com.SafetyNet.api.json.DataReaderService;
+import com.SafetyNet.api.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,7 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Autowired
     public PersonDAOImpl(List<Person> person) throws Exception {
+
         super();
         person       = new DataReaderService().getData().getPersons();
         this.persons = person;
@@ -41,6 +43,7 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public List<Person> findByLastName(String lastName) {
+
         List<Person> listPerson = new ArrayList<Person>();
         for (Person person : persons) {
             if ((person.getLastName()).equals(lastName)) {
@@ -58,7 +61,7 @@ public class PersonDAOImpl implements PersonDAO {
         for (Person person : persons) {
             if ((person.getAddress()).equals(address)) {
                 listPerson.add(person);
-                
+
             }
         }
         return listPerson;
@@ -68,7 +71,7 @@ public class PersonDAOImpl implements PersonDAO {
     public List<Person> findEmailByCity(String city) {
 
         List<Person> listPerson = new ArrayList<Person>();
-        List<String> mail = new ArrayList<String>();
+        List<String> mail       = new ArrayList<String>();
         for (Person person : persons) {
             if ((person.getCity()).equals(city)) {
                 listPerson.add(person);

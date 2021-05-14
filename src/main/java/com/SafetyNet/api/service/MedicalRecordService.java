@@ -22,6 +22,7 @@ public class MedicalRecordService {
     }
 
     public List<MedicalRecord> findAll() {
+
         return medicalRecordDAO.findAll();
     }
 
@@ -32,15 +33,17 @@ public class MedicalRecordService {
 
     public List<MedicalRecord> save(MedicalRecord medicalRecord) {
 
-        return  medicalRecordDAO.save(medicalRecord);
+        return medicalRecordDAO.save(medicalRecord);
     }
 
     public MedicalRecord update(String address, MedicalRecord medicalRecord) throws ParseException {
+
         return medicalRecordDAO.update(address, medicalRecord);
     }
 
     public void deleteById(String address) {
+
         medicalRecordDAO.deleteById(address);
     }
-    
+
 }

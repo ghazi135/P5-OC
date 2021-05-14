@@ -17,125 +17,128 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
 
 
+@ExtendWith(MockitoExtension.class)
+public class MedicalRecordServiceTest {
 
+    MedicalRecordService medicalRecordService;
 
-    @ExtendWith(MockitoExtension.class)
-    public class MedicalRecordServiceTest {
+    List<MedicalRecord> medicalRecordList;
 
-        MedicalRecordService medicalRecordService;
+    @Mock
+    MedicalRecordDAO medicalRecordDAO;
 
-        List<MedicalRecord> medicalRecordList;
+    @BeforeEach
+    void setup() {
 
-        @Mock
-        MedicalRecordDAO medicalRecordDAO;
-        @BeforeEach
-        void setup(){
-            medicalRecordService = new MedicalRecordService(medicalRecordDAO);
-        }
+        medicalRecordService = new MedicalRecordService(medicalRecordDAO);
+    }
 
-        @Test
-        public void findAll(){
-            medicalRecordList = new ArrayList<MedicalRecord>();
-            MedicalRecord medicalRecord = new MedicalRecord();
-            List<String> medication = new ArrayList<String>();
-            List<String> allergie = new ArrayList<String>();
-            allergie.add("AAAA");
-            allergie.add("BBBB");
-            medication.add("AAAA");
-            medication.add("BBBB");
-            medicalRecord.setFirstName("ghazi");
-            medicalRecord.setLastName("bouzazi");
-            medicalRecord.setAllergies(allergie);
-            medicalRecord.setMedications(medication);
-            medicalRecord.setBirthdate("12/27/1994");
+    @Test
+    public void findAll() {
 
-            medicalRecordList.add(medicalRecord);
-            when(medicalRecordService.findAll()).thenReturn(medicalRecordList);
-            assertThat(medicalRecordService.findAll().toString(), containsString("ghazi"));
+        medicalRecordList = new ArrayList<MedicalRecord>();
+        MedicalRecord medicalRecord = new MedicalRecord();
+        List<String>  medication    = new ArrayList<String>();
+        List<String>  allergie      = new ArrayList<String>();
+        allergie.add("AAAA");
+        allergie.add("BBBB");
+        medication.add("AAAA");
+        medication.add("BBBB");
+        medicalRecord.setFirstName("ghazi");
+        medicalRecord.setLastName("bouzazi");
+        medicalRecord.setAllergies(allergie);
+        medicalRecord.setMedications(medication);
+        medicalRecord.setBirthdate("12/27/1994");
 
-        }
-
-        @Test
-        public void findById(){
-            MedicalRecord medicalRecord = new MedicalRecord();
-            List<String> medication = new ArrayList<String>();
-            List<String> allergie = new ArrayList<String>();
-            allergie.add("AAAA");
-            allergie.add("BBBB");
-            medication.add("AAAA");
-            medication.add("BBBB");
-            medicalRecord.setFirstName("ghazi");
-            medicalRecord.setLastName("bouzazi");
-            medicalRecord.setAllergies(allergie);
-            medicalRecord.setMedications(medication);
-            medicalRecord.setBirthdate("12/27/1994");
-            when(medicalRecordService.findById("ghazibouzazi")).thenReturn(medicalRecord);
-            assertThat(medicalRecordService.findById("ghazibouzazi").toString(), containsString("ghazi"));
-
-        }
-
-        @Test
-        public void saveMedicalRecordTest(){
-            medicalRecordList = new ArrayList<MedicalRecord>();
-            MedicalRecord medicalRecord = new MedicalRecord();
-            List<String> medication = new ArrayList<String>();
-            List<String> allergie = new ArrayList<String>();
-            allergie.add("AAAA");
-            allergie.add("BBBB");
-            medication.add("AAAA");
-            medication.add("BBBB");
-            medicalRecord.setFirstName("ghazi");
-            medicalRecord.setLastName("bouzazi");
-            medicalRecord.setAllergies(allergie);
-            medicalRecord.setMedications(medication);
-            medicalRecord.setBirthdate("12/27/1994");
-            medicalRecordList.add(medicalRecord);
-            when(medicalRecordService.save(medicalRecord)).thenReturn(medicalRecordList);
-            assertThat(medicalRecordService.save(medicalRecord).toString(), containsString("ghazi"));
-
-        }
-
-        @Test
-        public void updateMedicalRecordTest() throws ParseException {
-            MedicalRecord medicalRecord = new MedicalRecord();
-            List<String> medication = new ArrayList<String>();
-            List<String> allergie = new ArrayList<String>();
-            allergie.add("AAAA");
-            allergie.add("BBBB");
-            medication.add("AAAA");
-            medication.add("BBBB");
-            medicalRecord.setFirstName("ghazi");
-            medicalRecord.setLastName("bouzazi");
-            medicalRecord.setAllergies(allergie);
-            medicalRecord.setMedications(medication);
-            medicalRecord.setBirthdate("12/27/1994");
-            when(medicalRecordService.update("ghazibouzazi", medicalRecord)).thenReturn(medicalRecord);
-            assertThat(medicalRecordService.update("ghazibouzazi",medicalRecord).toString(), containsString("ghazi"));
-
-        }
-
-        @Test
-        public void deleteMedicalRecordTest(){
-            MedicalRecord medicalRecord = new MedicalRecord();
-            List<String> medication = new ArrayList<String>();
-            List<String> allergie = new ArrayList<String>();
-            allergie.add("AAAA");
-            allergie.add("BBBB");
-            medication.add("AAAA");
-            medication.add("BBBB");
-            medicalRecord.setFirstName("ghazi");
-            medicalRecord.setLastName("bouzazi");
-            medicalRecord.setAllergies(allergie);
-            medicalRecord.setMedications(medication);
-            medicalRecord.setBirthdate("12/27/1994");
-            medicalRecordDAO.save(medicalRecord);
-            medicalRecordService.deleteById("ghazibouzazi");
-            assertThat(medicalRecordService.findAll().toString(), containsString(""));
-
-        }
-
-
-
+        medicalRecordList.add(medicalRecord);
+        when(medicalRecordService.findAll()).thenReturn(medicalRecordList);
+        assertThat(medicalRecordService.findAll().toString(), containsString("ghazi"));
 
     }
+
+    @Test
+    public void findById() {
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+        List<String>  medication    = new ArrayList<String>();
+        List<String>  allergie      = new ArrayList<String>();
+        allergie.add("AAAA");
+        allergie.add("BBBB");
+        medication.add("AAAA");
+        medication.add("BBBB");
+        medicalRecord.setFirstName("ghazi");
+        medicalRecord.setLastName("bouzazi");
+        medicalRecord.setAllergies(allergie);
+        medicalRecord.setMedications(medication);
+        medicalRecord.setBirthdate("12/27/1994");
+        when(medicalRecordService.findById("ghazibouzazi")).thenReturn(medicalRecord);
+        assertThat(medicalRecordService.findById("ghazibouzazi").toString(), containsString("ghazi"));
+
+    }
+
+    @Test
+    public void saveMedicalRecordTest() {
+
+        medicalRecordList = new ArrayList<MedicalRecord>();
+        MedicalRecord medicalRecord = new MedicalRecord();
+        List<String>  medication    = new ArrayList<String>();
+        List<String>  allergie      = new ArrayList<String>();
+        allergie.add("AAAA");
+        allergie.add("BBBB");
+        medication.add("AAAA");
+        medication.add("BBBB");
+        medicalRecord.setFirstName("ghazi");
+        medicalRecord.setLastName("bouzazi");
+        medicalRecord.setAllergies(allergie);
+        medicalRecord.setMedications(medication);
+        medicalRecord.setBirthdate("12/27/1994");
+        medicalRecordList.add(medicalRecord);
+        when(medicalRecordService.save(medicalRecord)).thenReturn(medicalRecordList);
+        assertThat(medicalRecordService.save(medicalRecord).toString(), containsString("ghazi"));
+
+    }
+
+    @Test
+    public void updateMedicalRecordTest() throws ParseException {
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+        List<String>  medication    = new ArrayList<String>();
+        List<String>  allergie      = new ArrayList<String>();
+        allergie.add("AAAA");
+        allergie.add("BBBB");
+        medication.add("AAAA");
+        medication.add("BBBB");
+        medicalRecord.setFirstName("ghazi");
+        medicalRecord.setLastName("bouzazi");
+        medicalRecord.setAllergies(allergie);
+        medicalRecord.setMedications(medication);
+        medicalRecord.setBirthdate("12/27/1994");
+        when(medicalRecordService.update("ghazibouzazi", medicalRecord)).thenReturn(medicalRecord);
+        assertThat(medicalRecordService.update("ghazibouzazi", medicalRecord).toString(), containsString("ghazi"));
+
+    }
+
+    @Test
+    public void deleteMedicalRecordTest() {
+
+        MedicalRecord medicalRecord = new MedicalRecord();
+        List<String>  medication    = new ArrayList<String>();
+        List<String>  allergie      = new ArrayList<String>();
+        allergie.add("AAAA");
+        allergie.add("BBBB");
+        medication.add("AAAA");
+        medication.add("BBBB");
+        medicalRecord.setFirstName("ghazi");
+        medicalRecord.setLastName("bouzazi");
+        medicalRecord.setAllergies(allergie);
+        medicalRecord.setMedications(medication);
+        medicalRecord.setBirthdate("12/27/1994");
+        medicalRecordDAO.save(medicalRecord);
+        medicalRecordService.deleteById("ghazibouzazi");
+        assertThat(medicalRecordService.findAll().toString(), containsString(""));
+
+    }
+
+
+}
 

@@ -8,16 +8,17 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.not;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PersonDAOTest {
+
     private List<Person>  listPersons;
     private PersonDAOImpl personDaoImpl;
 
     @BeforeEach
     public void setUp() throws Exception {
+
         personDaoImpl = new PersonDAOImpl(listPersons);
     }
 
@@ -33,7 +34,7 @@ public class PersonDAOTest {
     @Test
     public void findById() {
         // ARRANGE
-        Person person = new Person(); // method return value
+        Person person               = new Person(); // method return value
         String firstNameAndlastName = "JohnBoyd"; // parameter
         // ACT
         person = personDaoImpl.findById(firstNameAndlastName);
@@ -68,6 +69,7 @@ public class PersonDAOTest {
         assertThat(personDaoImpl.findEmailByCity(city).toString(), containsString("Culver"));
 
     }
+
     @Test
     public void save() {
         // ARRANGE
@@ -85,7 +87,7 @@ public class PersonDAOTest {
     public void update() {
         // ARRANGE
         String firstNameAndlastName = "JohnBoyd"; // parameter
-        Person person = new Person(); // parameter
+        Person person               = new Person(); // parameter
         person.setFirstName("AAAA");
         person.setCity("BBBB");
         // ACT

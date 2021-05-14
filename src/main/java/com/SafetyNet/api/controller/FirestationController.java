@@ -16,7 +16,7 @@ public class FirestationController {
 
 
     @GetMapping(value = "/firestation")
-    public List<Firestation> showAllFirestations()  {
+    public List<Firestation> showAllFirestations() {
 
         return firestationService.findAll();
     }
@@ -41,6 +41,7 @@ public class FirestationController {
 
     @DeleteMapping(value = "/firestation/{address}")
     public void deleteFirestation(@PathVariable String address) {
+
         firestationService.deleteById(address);
     }
 }

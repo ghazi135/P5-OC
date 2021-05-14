@@ -1,20 +1,7 @@
 package com.SafetyNet.api.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.SafetyNet.api.model.MedicalRecord;
+import com.SafetyNet.api.service.MedicalRecordService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +10,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import com.SafetyNet.api.service.MedicalRecordService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 
 @WebMvcTest(MedicalRecordController.class)
@@ -39,13 +34,13 @@ public class MedicalRecordControllerTest {
     public void showAllMedicalRecords() throws Exception {
 
         MedicalRecord medicalRecord = new MedicalRecord();
-        List<String> medication = new ArrayList<String>();
-        List<String> allergie = new ArrayList<String>();
+        List<String>  medication    = new ArrayList<String>();
+        List<String>  allergie      = new ArrayList<String>();
         allergie.add("AAAA");
         allergie.add("BBBB");
         medication.add("AAAA");
         medication.add("BBBB");
-        List<MedicalRecord>     listMedicalRecord       = new ArrayList<MedicalRecord>();
+        List<MedicalRecord> listMedicalRecord = new ArrayList<MedicalRecord>();
         medicalRecord.setFirstName("ghazi");
         medicalRecord.setLastName("bouzazi");
         medicalRecord.setAllergies(allergie);
@@ -56,7 +51,7 @@ public class MedicalRecordControllerTest {
         when(medicalRecordService.findAll()).thenReturn(listMedicalRecord);
 
         MvcResult mvcResult = mockMvc.perform(get("/medicalRecord")).andDo(print()).andReturn();
-        int status = mvcResult.getResponse().getStatus();
+        int       status    = mvcResult.getResponse().getStatus();
 
         assertEquals(status, 200);
         verify(medicalRecordService, times(1)).findAll();
@@ -66,8 +61,8 @@ public class MedicalRecordControllerTest {
     public void showMedicalRecordById() throws Exception {
         // ARRANGE
         MedicalRecord medicalRecord = new MedicalRecord();
-        List<String> medication = new ArrayList<String>();
-        List<String> allergie = new ArrayList<String>();
+        List<String>  medication    = new ArrayList<String>();
+        List<String>  allergie      = new ArrayList<String>();
         allergie.add("AAAA");
         allergie.add("BBBB");
         medication.add("AAAA");
@@ -82,7 +77,7 @@ public class MedicalRecordControllerTest {
 
         // ACT
         MvcResult mvcResult = mockMvc.perform(get("/medicalRecord/Someone")).andDo(print()).andReturn();
-        int status = mvcResult.getResponse().getStatus();
+        int       status    = mvcResult.getResponse().getStatus();
 
         assertEquals(status, 200);
         verify(medicalRecordService, times(1)).findById(any(String.class));
@@ -91,15 +86,16 @@ public class MedicalRecordControllerTest {
     @Test
     public void addMedicalRecord() throws Exception {
 
-        MedicalRecord medicalRecord = new MedicalRecord();
-        List<MedicalRecord>     listMedicalRecord       = new ArrayList<MedicalRecord>();
+        MedicalRecord       medicalRecord     = new MedicalRecord();
+        List<MedicalRecord> listMedicalRecord = new ArrayList<MedicalRecord>();
 
         when(medicalRecordService.save(any(MedicalRecord.class))).thenReturn(listMedicalRecord);
 
         // ACT
-        MvcResult mvcResult = mockMvc.perform(
-                post("/medicalRecord").contentType(MediaType.APPLICATION_JSON).content("{ \"firstName\":\"ghazi\", \"lastName\":\"bouzazi\", \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }"))
-                                     .andDo(print()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(post("/medicalRecord").contentType(MediaType.APPLICATION_JSON)
+                                                                    .content("{ \"firstName\":\"ghazi\", \"lastName\":\"bouzazi\", \"birthdate\":\"03/06/1984\", \"medications\":[\"aznol:350mg\", \"hydrapermazol:100mg\"], \"allergies\":[\"nillacilan\"] }"))
+                                     .andDo(print())
+                                     .andReturn();
         int status = mvcResult.getResponse().getStatus();
 
         assertEquals(status, 200);
@@ -111,8 +107,8 @@ public class MedicalRecordControllerTest {
     public void updateMedicalRecord() throws Exception {
         // ARRANGE
         MedicalRecord medicalRecord = new MedicalRecord();
-        List<String> medication = new ArrayList<String>();
-        List<String> allergie = new ArrayList<String>();
+        List<String>  medication    = new ArrayList<String>();
+        List<String>  allergie      = new ArrayList<String>();
         allergie.add("a1");
         allergie.add("a2");
         medication.add("a2");
@@ -122,12 +118,13 @@ public class MedicalRecordControllerTest {
         medicalRecord.setAllergies(allergie);
         medicalRecord.setMedications(medication);
         medicalRecord.setBirthdate("12/27/1994");
-        when(medicalRecordService.update(any(String.class), (any(MedicalRecord.class))))
-                .thenReturn(medicalRecord);
+        when(medicalRecordService.update(any(String.class), (any(MedicalRecord.class)))).thenReturn(medicalRecord);
 
         // ACT
         MvcResult mvcResult = mockMvc.perform(put("/medicalRecord/ghazibouzazi").contentType(MediaType.APPLICATION_JSON)
-                                                                           .content("{\"firstName\":\"ghazi\"}")).andDo(print()).andReturn();
+                                                                                .content("{\"firstName\":\"ghazi\"}"))
+                                     .andDo(print())
+                                     .andReturn();
         int status = mvcResult.getResponse().getStatus();
 
         // ASSERT
@@ -141,7 +138,7 @@ public class MedicalRecordControllerTest {
         Mockito.doNothing().when(medicalRecordService).deleteById("firstNameAndlastName");
 
         MvcResult mvcResult = mockMvc.perform(delete("/medicalRecord/ghazibouzazi")).andDo(print()).andReturn();
-        int status = mvcResult.getResponse().getStatus();
+        int       status    = mvcResult.getResponse().getStatus();
 
         assertEquals(status, 200);
         verify(medicalRecordService, times(1)).deleteById(any(String.class));

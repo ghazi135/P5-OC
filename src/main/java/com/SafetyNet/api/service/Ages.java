@@ -10,16 +10,17 @@ import java.util.List;
 
 public class Ages {
 
-    private long       children = 0;
-    private long       adults   = 0;
-    private       long       age     = 0;
-    private final List<Long> listAge = new ArrayList<Long>();
+    private final List<Long> listAge  = new ArrayList<Long>();
+    private       long       children = 0;
+    private       long       adults   = 0;
+    private       long       age      = 0;
 
     public void calculateDate(Date birthdate) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy"); // Equal to the JSON file
-        long DaysToHave18YearsOld = 6570; // Numbers of days to have 18years old.
 
-        LocalDate localDate = LocalDate.now(); // Get the current LocalDate
+        DateTimeFormatter dateTimeFormatter    = DateTimeFormatter.ofPattern("MM/dd/yyyy"); // Equal to the JSON file
+        long              DaysToHave18YearsOld = 6570; // Numbers of days to have 18years old.
+
+        LocalDate localDate            = LocalDate.now(); // Get the current LocalDate
         LocalDate birthDateToLocalDate = birthdate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         // Convert the Date from JSON to LocalDate, it use the system time zone.
         String localDateFormatToString = localDate.format(dateTimeFormatter);
@@ -45,18 +46,22 @@ public class Ages {
     }
 
     public long getChildren() {
+
         return children;
     }
 
     public long getAdults() {
+
         return adults;
     }
 
     public long getAge() {
+
         return age;
     }
 
     public List<Long> getListAge() {
+
         return listAge;
     }
 
