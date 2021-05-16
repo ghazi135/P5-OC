@@ -38,7 +38,7 @@ public class FirestationControllerTest {
         listFirestation.add(firestation);
         when(firestationService.findAll()).thenReturn(listFirestation);
 
-        MvcResult mvcResult = mockMvc.perform(get("/firestation/")).andDo(print()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(get("/firestations")).andDo(print()).andReturn();
         int       status    = mvcResult.getResponse().getStatus();
         assertEquals(status, 200);
         verify(firestationService, times(1)).findAll();

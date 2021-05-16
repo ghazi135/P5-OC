@@ -7,6 +7,8 @@ import com.SafetyNet.api.dto.*;
 import com.SafetyNet.api.model.Firestation;
 import com.SafetyNet.api.model.MedicalRecord;
 import com.SafetyNet.api.model.Person;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 @Service
 public class EndpointUrlService {
+
+    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(EndpointUrlService.class);
 
     @Autowired
     private final PersonDAO        personDAO;
@@ -38,6 +43,7 @@ public class EndpointUrlService {
 
     public EmailDTO getMailsByCity(String city) {
 
+        log.info("get mails by city");
         List<String> email = new ArrayList<>();
         for (Person person : personDAO.findEmailByCity(city)) {
             email.add(person.getEmail());
@@ -48,6 +54,7 @@ public class EndpointUrlService {
 
     public PersonByFirestationDTO getPersonsByFirestation(int stationNumber) throws ParseException {
 
+        log.info("Get persons by firestation");
         ages = new Ages();
         List<Person> listPersonLocal = new ArrayList<Person>();
         for (Firestation firestation : firestationDAO.findAddressByStation(stationNumber)) {
@@ -64,6 +71,7 @@ public class EndpointUrlService {
 
     public List<ChildrenByAdressDTO> getChildrenByAddress(String address) throws ParseException {
 
+        log.info("Get children By address");
         List<ChildrenByAdressDTO> childrenByAdressDTOList = new ArrayList<ChildrenByAdressDTO>();
         List<Person>              listPerson2             = personDAO.findByAddress(address);
         ages = new Ages();
@@ -85,6 +93,7 @@ public class EndpointUrlService {
 
     public PhoneAlertByStationNumberDTO getPhoneNumbersByFirestation(int firestation) {
 
+        log.info("Get phone numbers by firestation");
         List<Person> listPersonLocal = new ArrayList<Person>();
         List<String> listPhones      = new ArrayList<String>();
         for (Firestation firestation1 : firestationDAO.findAddressByStation(firestation)) {
@@ -101,6 +110,7 @@ public class EndpointUrlService {
 
     public List<PersonByAdressDTO> getPersonsByAddress(String address) throws ParseException {
 
+        log.info("get persons by address");
         Firestation             firestationLocal      = firestationDAO.findById(address);
         List<PersonByAdressDTO> PersonByAdressDTOList = new ArrayList<PersonByAdressDTO>();
         List<Person>            listPersonLocal       = new ArrayList<Person>();
@@ -122,6 +132,7 @@ public class EndpointUrlService {
 
     public List<PersonsAddressByFirestationDTO> getPersonsAddressByFirestations(List<Integer> stations) throws ParseException {
 
+        log.info("get persons address by firestations");
         List<PersonsAddressByFirestationDTO> personsAddressByFirestationDTOList = new ArrayList<PersonsAddressByFirestationDTO>();
         Ages                                 ages                               = new Ages();
         List<Person>                         listPersonLocal                    = new ArrayList<Person>();
@@ -149,6 +160,8 @@ public class EndpointUrlService {
     }
 
     public List<PersonInfoDTO> getPersonInfoByPerson(String firstName, String lastName) throws ParseException {
+
+        log.info("get person info by person");
 
         List<Person>        listPerson2     = personDAO.findByLastName(lastName);
         List<Person>        listPersonLocal = new ArrayList<Person>(listPerson2);
