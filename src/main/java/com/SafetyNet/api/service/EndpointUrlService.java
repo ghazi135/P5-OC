@@ -21,7 +21,6 @@ import java.util.List;
 @Service
 public class EndpointUrlService {
 
-    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(EndpointUrlService.class);
 
     @Autowired
     private final PersonDAO        personDAO;

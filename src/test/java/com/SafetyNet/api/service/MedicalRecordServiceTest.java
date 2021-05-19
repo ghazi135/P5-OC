@@ -51,7 +51,7 @@ public class MedicalRecordServiceTest {
         medicalRecord.setBirthdate("12/27/1994");
 
         medicalRecordList.add(medicalRecord);
-        when(medicalRecordService.findAll()).thenReturn(medicalRecordList);
+        when(medicalRecordDAO.findAll()).thenReturn(medicalRecordList);
         assertThat(medicalRecordService.findAll().toString(), containsString("ghazi"));
 
     }
@@ -71,7 +71,7 @@ public class MedicalRecordServiceTest {
         medicalRecord.setAllergies(allergie);
         medicalRecord.setMedications(medication);
         medicalRecord.setBirthdate("12/27/1994");
-        when(medicalRecordService.findById("ghazibouzazi")).thenReturn(medicalRecord);
+        when(medicalRecordDAO.findById("ghazibouzazi")).thenReturn(medicalRecord);
         assertThat(medicalRecordService.findById("ghazibouzazi").toString(), containsString("ghazi"));
 
     }
@@ -93,7 +93,7 @@ public class MedicalRecordServiceTest {
         medicalRecord.setMedications(medication);
         medicalRecord.setBirthdate("12/27/1994");
         medicalRecordList.add(medicalRecord);
-        when(medicalRecordService.save(medicalRecord)).thenReturn(medicalRecordList);
+        when(medicalRecordDAO.save(medicalRecord)).thenReturn(medicalRecordList);
         assertThat(medicalRecordService.save(medicalRecord).toString(), containsString("ghazi"));
 
     }
@@ -113,7 +113,7 @@ public class MedicalRecordServiceTest {
         medicalRecord.setAllergies(allergie);
         medicalRecord.setMedications(medication);
         medicalRecord.setBirthdate("12/27/1994");
-        when(medicalRecordService.update("ghazibouzazi", medicalRecord)).thenReturn(medicalRecord);
+        when(medicalRecordDAO.update("ghazibouzazi", medicalRecord)).thenReturn(medicalRecord);
         assertThat(medicalRecordService.update("ghazibouzazi", medicalRecord).toString(), containsString("ghazi"));
 
     }

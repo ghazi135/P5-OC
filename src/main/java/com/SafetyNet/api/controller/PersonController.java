@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 public class PersonController {
 
-    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(PersonController.class);
 
 
     @Autowired

@@ -1,15 +1,16 @@
 package com.SafetyNet.api.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
+@Log4j2
 public class DataReaderService {
 
 
-    private static final Logger logger = LogManager.getLogger(DataReaderService.class);
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final File         file         = new File("src/main/resources/Data.json");
@@ -20,10 +21,10 @@ public class DataReaderService {
         dataReader = objectMapper.readValue(file, DataReader.class);
 
         if (dataReader != null) {
-            logger.info("<--- Data.json file correctly loaded");
+            log.info("<--- Data.json file correctly loaded");
             return dataReader;
         } else {
-            logger.error("while trying to read the Data.json file");
+            log.error("while trying to read the Data.json file");
             return null;
         }
 
@@ -32,7 +33,7 @@ public class DataReaderService {
 
     public DataReader getData() throws Exception {
 
-        logger.info("Read data.json file");
+        log.info("Read data.json file");
         dataReader = readJSONFile();
         return dataReader;
     }

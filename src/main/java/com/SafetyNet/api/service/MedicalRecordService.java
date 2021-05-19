@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 public class MedicalRecordService {
 
-    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(MedicalRecordService.class);
 
     @Autowired
     private MedicalRecordDAO medicalRecordDAO;

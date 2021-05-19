@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 public class PersonService {
 
-    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(PersonService.class);
 
     @Autowired
     private final PersonDAO personDAO;
