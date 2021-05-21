@@ -50,8 +50,7 @@ public class MedicalRecord {
     }
 
     public String getBirthdate() throws ParseException {
-        //
-        //        Date date1 =new SimpleDateFormat("MM/dd/yyyy").parse();
+
         return birthdate;
     }
 
